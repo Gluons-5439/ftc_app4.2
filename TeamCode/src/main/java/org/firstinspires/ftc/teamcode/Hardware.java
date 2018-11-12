@@ -24,14 +24,15 @@ public class Hardware {
 
     ColorSensor mineralSensor;
 
-    DcMotor frontLeft;          //Motor 2          FRONT
-    DcMotor frontRight;         //Motor 3          FRONT
-    DcMotor backLeft;           //Motor 0
-    DcMotor backRight;          //Motor 1
+    DcMotor frontRight;         //Motor 0
+    DcMotor frontLeft;          //Motor 1
+    DcMotor backRight;          //Motor 2
+    DcMotor backLeft;           //Motor 3
+
     private BNO055IMU imu;
 
     DcMotor rollerLift;
-    DcMotor hangLift;
+    //DcMotor hangLift;
     //DcMotor spin;
     //DcMotor changeMechPos;
 
@@ -68,7 +69,7 @@ public class Hardware {
             backRight = hwMap.dcMotor.get("backRight");
 
             rollerLift = hwMap.dcMotor.get("rollerLift");
-            hangLift = hwMap.dcMotor.get("hangLift");
+           // hangLift = hwMap.dcMotor.get("hangLift");
             //spin = hwMap.dcMotor.get("spin");
             //changeMechPos = hwMap.dcMotor.get("changeMechPos");
 
@@ -82,17 +83,17 @@ public class Hardware {
             backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             rollerLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            hangLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+           // hangLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             //spin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             //changeMechPos.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             frontLeft.setDirection(DcMotor.Direction.REVERSE);
-            frontRight.setDirection(DcMotor.Direction.FORWARD); // reversed
+            frontRight.setDirection(DcMotor.Direction.FORWARD);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
             backRight.setDirection(DcMotor.Direction.FORWARD);
 
             rollerLift.setDirection(DcMotor.Direction.FORWARD);
-            hangLift.setDirection(DcMotor.Direction.FORWARD);
+          //  hangLift.setDirection(DcMotor.Direction.FORWARD);
             //spin.setDirection(DcMotor.Direction.FORWARD);
             //changeMechPos.setDirection(DcMotor.Direction.FORWARD);
         }

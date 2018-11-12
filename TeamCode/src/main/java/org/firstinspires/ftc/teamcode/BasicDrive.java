@@ -11,7 +11,7 @@ public class BasicDrive extends LinearOpMode {
     //Creates hulk object
     AutonomousTools t = new AutonomousTools();
     //Declares gyro
-    public int liftTimer = 25, sensorTimer = 25;
+
 
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
@@ -42,31 +42,32 @@ public class BasicDrive extends LinearOpMode {
              * [3] If there is movement in 2 dimensions
              * [4] No movement
              */
-            boolean moveY = (gamepad1.left_stick_y > .1 || gamepad1.left_stick_y < -.1);
-            boolean moveX = (gamepad1.left_stick_x > .15 || gamepad1.left_stick_x < -.15);
-            double rightPower = 0,                                      // CONDITION 4 (values are not changed if both moveX and moveY are FALSE)
+
+            boolean xMove = gamepad1.left_stick_x > 0.1 || gamepad1.left_stick_x < -0.1;
+            boolean yMove = gamepad1.left_stick_y > 0.1 || gamepad1.left_stick_y < -0.1;
+
+            double rightPower = 0,
                    leftPower = 0;
-            double gamepadXABS = (moveX ? Math.abs(gamepad1.left_stick_x) : 0);
-            double speed = 0.8 * (gamepad1.left_stick_y >= 0 ? 1 : -1) * Math.sqrt(Math.pow((moveY ? gamepad1.left_stick_y : 1),2) + Math.pow(gamepadXABS, 2));
+            double gamepadXABS = (xMove ? Math.abs(gamepad1.left_stick_x) : 0);
+            double speed = 0.8 * (gamepad1.left_stick_y >= 0 ? 1 : -1) * Math.sqrt(Math.pow((yMove ? gamepad1.left_stick_y : 1),2) + Math.pow(gamepadXABS, 2));
 
 
-         //  boolean xMove = gamepad1.left_stick_x > 0.1 || gamepad1.left_stick_x < -0.1;
-         //  boolean yMove = gamepad1.left_stick_y > 0.1 || gamepad1.left_stick_y < -0.1;
 
-         /*  if(!xMove && !yMove)  //Case: Not moving
+
+           if(!xMove && !yMove)  //Case: Not moving
            {
                leftPower = 0;
                rightPower = 0;
            }
            else if(!xMove && yMove)  // Case: Straight up/Down
            {
-               leftPower = 1;
-               rightPower = 1;
+               leftPower = gamepad1.left_stick_y;
+               rightPower = gamepad1.left_stick_y;
            }
            else if(xMove && !yMove) // Case: Straight right/left
            {
-               leftPower = 1;
-               rightPower = -1;
+               leftPower = gamepad1.left_stick_x;
+               rightPower = -gamepad1.left_stick_x;
            }
            else // regular range
            {
@@ -84,13 +85,13 @@ public class BasicDrive extends LinearOpMode {
            }
 
             hulk.frontLeft.setPower(leftPower * speed);
-            hulk.frontRight.setPower(-rightPower * speed);
+            hulk.frontRight.setPower(rightPower * speed);
             hulk.backLeft.setPower(leftPower * speed);
-            hulk.backRight.setPower(-rightPower * speed);
-*/
+            hulk.backRight.setPower(rightPower * speed);
 
-            if (moveY) {                                                // Forward movement
-                if (moveX) {                                            // For turns
+/*
+            if (xMove) {                                                // Forward movement
+                if (yMove) {                                            // For turns
                     leftPower = 0.5;                                    // Starts at middle (50%)
                     rightPower = 0.5;
                     if (gamepad1.left_stick_x > 0) {                    // x: right
@@ -115,7 +116,7 @@ public class BasicDrive extends LinearOpMode {
             hulk.frontRight.setPower(rightPower * speed);             // Negative to account for opposing wheel directions
             hulk.backLeft.setPower(leftPower * speed);
             hulk.backRight.setPower(rightPower * speed);
-
+*/
             //CONTROL ---------------------------------------------------------------------------------------------
             /*
             if (gamepad1.left_trigger > 0.1)            //Hold down left trigger to spin outwards (?)
@@ -126,23 +127,18 @@ public class BasicDrive extends LinearOpMode {
             else
                 hulk.spin.setPower(0);*/
 
-            if (gamepad1.y && liftTimer == 25) {
+            if (gamepad1.y) {
                 t.changeRollerLift(t.liftPos);
                 t.liftPos = !t.liftPos;
-                liftTimer = 0;
+                sleep(250);
 
             }
 
-            if (gamepad1.a && sensorTimer == 25) {
-                hulk.mineralSensor.enableLed(!t.lightOn);
+            if (gamepad1.a) {
+                hulk.mineralSensor.enableLed(t.lightOn);
                 t.lightOn = !t.lightOn;
-                sensorTimer = 0;
+                sleep(250);
             }
-
-            if (liftTimer < 25)         // TIMERS
-                liftTimer ++ ;
-            if (sensorTimer < 25)
-                sensorTimer ++ ;
 
 
             /*if(gamepad1.a) {
