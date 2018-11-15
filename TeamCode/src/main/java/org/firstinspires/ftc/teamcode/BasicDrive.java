@@ -52,9 +52,16 @@ public class BasicDrive extends LinearOpMode {
             double speed = 0.8 * (gamepad1.left_stick_y >= 0 ? 1 : -1) * Math.sqrt(Math.pow((yMove ? gamepad1.left_stick_y : 1),2) + Math.pow(gamepadXABS, 2));
 
 
+            double forward = -gamepad1.left_stick_y;
+            double right = gamepad1.left_stick_x;
+            double leftspeed = forward - right;
+            double rightspeed = forward + right;
+            hulk.frontLeft.setPower(leftspeed*0.75);
+            hulk.backLeft.setPower(leftspeed*0.75);
+            hulk.frontRight.setPower(rightspeed*0.75);
+            hulk.backRight.setPower(rightspeed*0.75);
 
-
-           if(!xMove && !yMove)  //Case: Not moving
+         /*  if(!xMove && !yMove)  //Case: Not moving
            {
                leftPower = 0;
                rightPower = 0;
@@ -88,7 +95,7 @@ public class BasicDrive extends LinearOpMode {
             hulk.frontRight.setPower(rightPower * speed);
             hulk.backLeft.setPower(leftPower * speed);
             hulk.backRight.setPower(rightPower * speed);
-
+*/
 /*
             if (xMove) {                                                // Forward movement
                 if (yMove) {                                            // For turns
@@ -108,7 +115,7 @@ public class BasicDrive extends LinearOpMode {
                     rightPower = 0.5 * Math.abs(gamepad1.left_stick_y);
                 }
             }
-            else if (moveX) {                                           // CONDITION 2
+            else if (xMove) {                                           // CONDITION 2
                     leftPower = gamepad1.left_stick_x;
                     rightPower = -gamepad1.left_stick_x;
             }
@@ -116,7 +123,7 @@ public class BasicDrive extends LinearOpMode {
             hulk.frontRight.setPower(rightPower * speed);             // Negative to account for opposing wheel directions
             hulk.backLeft.setPower(leftPower * speed);
             hulk.backRight.setPower(rightPower * speed);
-*/
+
             //CONTROL ---------------------------------------------------------------------------------------------
             /*
             if (gamepad1.left_trigger > 0.1)            //Hold down left trigger to spin outwards (?)
@@ -127,18 +134,19 @@ public class BasicDrive extends LinearOpMode {
             else
                 hulk.spin.setPower(0);*/
 
-            if (gamepad1.y) {
+         /*   if (gamepad1.y) {
                 t.changeRollerLift(t.liftPos);
                 t.liftPos = !t.liftPos;
                 sleep(250);
 
             }
+            */
 
-            if (gamepad1.a) {
-                hulk.mineralSensor.enableLed(t.lightOn);
-                t.lightOn = !t.lightOn;
-                sleep(250);
-            }
+          //  if (gamepad1.a) {
+             //   hulk.mineralSensor.enableLed(t.lightOn);
+            //    t.lightOn = !t.lightOn;
+           //     sleep(250);
+          //  }
 
 
             /*if(gamepad1.a) {
@@ -210,14 +218,14 @@ public class BasicDrive extends LinearOpMode {
             //telemetry.addLine();
 
             telemetry.addLine("ACCESSORIES");
-            telemetry.addData("LIFT Power: ", hulk.rollerLift.getPower());
-            telemetry.addData("COLOR SENSOR Color:", hulk.mineralSensor.argb());
+       //     telemetry.addData("LIFT Power: ", hulk.rollerLift.getPower());
+       //     telemetry.addData("COLOR SENSOR Color:", hulk.mineralSensor.argb());
             telemetry.addLine("COLOR SENSOR:");
-            telemetry.addData("  ARGB Hex value: ", hulk.mineralSensor.argb());
-            telemetry.addData("  RED value: ", hulk.mineralSensor.red());
-            telemetry.addData("  GREEN value: ", hulk.mineralSensor.green());
-            telemetry.addData("  BLUE value: ", hulk.mineralSensor.blue());
-            telemetry.addLine("FOUND GOLD: " + (t.foundGold() ? "TRUE" : "FALSE"));
+       //     telemetry.addData("  ARGB Hex value: ", hulk.mineralSensor.argb());
+       //     telemetry.addData("  RED value: ", hulk.mineralSensor.red());
+       //     telemetry.addData("  GREEN value: ", hulk.mineralSensor.green());
+       //     telemetry.addData("  BLUE value: ", hulk.mineralSensor.blue());
+      //      telemetry.addLine("FOUND GOLD: " + (t.foundGold() ? "TRUE" : "FALSE"));
             telemetry.addLine("COLOR SENSOR " + (t.lightOn ? "ON" : "OFF"));
             telemetry.addLine();
             telemetry.addLine();
@@ -225,6 +233,8 @@ public class BasicDrive extends LinearOpMode {
 
             telemetry.addLine();
             telemetry.addLine("DRIVE MOTORS");
+            telemetry.addData("X: ", gamepad1.left_stick_x);
+            telemetry.addData("Y: ", gamepad1.left_stick_y);
             telemetry.addData("FL Power: ", hulk.frontLeft.getPower());
             telemetry.addData("FR Power: ", hulk.frontRight.getPower());
             telemetry.addData("BL Power: ", hulk.backLeft.getPower());

@@ -31,38 +31,50 @@ public class DepotAuto extends LinearOpMode {
         relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
 
 
+
         waitForStart();
 
-        //Starting autonomous task: unhooking
 
-        t.changeRollerLift(liftpos); // extend
-        liftpos = !liftpos; //liftpos SHOULD be set to true
-        t.moveForward(100,P);
-        t.changeRollerLift(liftpos); // extend
-        liftpos = !liftpos; //liftpos SHOULD be set to false
+       /** Unhook **/
+        hulk.hangLift.setPower(0.1);
+        Thread.sleep(200);
+        hulk.hangLift.setPower(0);
         t.moveBackward(100,P);
+        hulk.hangLift.setPower(-0.1);
+        Thread.sleep(200);
+        hulk.hangLift.setPower(0);
         t.turn(90,'r');
-        //INSERT COLOR SENSOR STUFF HERE
+        /** Block Sense **/
+
+        /*
         hulk.mineralSensor.enableLed(true);
-        if (t.foundGold()) {
-            t.moveForward(500,0.5);   //moveTime and speed subject to change
+        //servo drop
+        t.
+
+        */
+
+
+
+        //INSERT COLOR SENSOR STUFF HERE
+     //   hulk.mineralSensor.enableLed(true);
+     //   if (t.foundGold()) {
+     //       t.moveForward(500,0.5);   //moveTime and speed subject to change
             //robot.spin.setPower(1);
-            t.moveForward(2000,0.5);
-        }
-        else {
-            t.turn(45,'r');   //Degree may change based on our distance from the 3 minerals
-            if (t.foundGold()) {
-                t.moveForward(500,0.5);
+       //     t.moveForward(2000,0.5);
+       // }
+    //    else {
+     //       t.turn(45,'r');   //Degree may change based on our distance from the 3 minerals
+      //      if (t.foundGold()) {
+        //        t.moveForward(500,0.5);
+         //       //robot.spin.setPower(1);
+        //        t.moveForward(2000,0.5);
+       //     }
+         //   else {
+         //       t.moveForward(500,0.5);
                 //robot.spin.setPower(1);
-                t.moveForward(2000,0.5);
-            }
-            else {
-                t.turn(90,'l');
-                t.moveForward(500,0.5);
-                //robot.spin.setPower(1);
-                t.moveForward(2000,0.5);
-            }
-        }
+         //       t.moveForward(2000,0.5);
+         //   }
+     //   }
         //if() //Enter a 3 fold if statement to check ALL blocks using if, else if, checking front, right, and then if not defaulting to left.
         //Moves forward and pushes//foam roller picks up
         // scores both block and team marker in the depot

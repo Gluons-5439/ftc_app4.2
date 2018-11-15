@@ -26,12 +26,19 @@ public class AutonomousTools {
         hulk.backRight.setPower(speed);
         Thread.sleep(moveTime);
     }
+    //public static void main(String args[])
+   // {
+
+
+
+  //  }
     public void moveBackward(int moveTime, double speed) throws InterruptedException {
         hulk.frontLeft.setPower(-speed);
         hulk.frontRight.setPower(-speed);
         hulk.backLeft.setPower(-speed);
         hulk.backRight.setPower(-speed);
         Thread.sleep(moveTime);
+
     }
 
     public void turn(int degrees, char dir) throws InterruptedException {
@@ -52,7 +59,7 @@ public class AutonomousTools {
         Thread.sleep(time);
     }
 
-    public void changeRollerLift(boolean up) throws InterruptedException { //if up is true, it is up, so the lift needs to go down, else, it goes up
+   /* public void changeRollerLift(boolean up) throws InterruptedException { //if up is true, it is up, so the lift needs to go down, else, it goes up
         if (!up) {
             hulk.rollerLift.setPower(-0.25); //not too fast
             Thread.sleep(2000);
@@ -63,11 +70,12 @@ public class AutonomousTools {
         }
         //EXPERIMENTAL time = (2 PI rad) / (angular velocity (6.7544 rad/s)) * 1000         (UNUSED)
     }
+    */
 
-    public boolean foundGold() {
-        if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 100);
-        return false;
-    }
+   // public boolean foundGold() {
+   //     if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 100);
+    //    return false;
+   // }
 
 
 
