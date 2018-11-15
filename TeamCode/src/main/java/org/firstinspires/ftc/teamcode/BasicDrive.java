@@ -51,15 +51,21 @@ public class BasicDrive extends LinearOpMode {
             double gamepadXABS = (xMove ? Math.abs(gamepad1.left_stick_x) : 0);
             double speed = 0.8 * (gamepad1.left_stick_y >= 0 ? 1 : -1) * Math.sqrt(Math.pow((yMove ? gamepad1.left_stick_y : 1),2) + Math.pow(gamepadXABS, 2));
 
-
+            boolean isSlow = false;
+            if(gamepad1.back)
+            {
+                isSlow = true;
+            }
             double forward = -gamepad1.left_stick_y;
             double right = gamepad1.left_stick_x;
             double leftspeed = forward - right;
             double rightspeed = forward + right;
-            hulk.frontLeft.setPower(leftspeed*0.75);
-            hulk.backLeft.setPower(leftspeed*0.75);
-            hulk.frontRight.setPower(rightspeed*0.75);
-            hulk.backRight.setPower(rightspeed*0.75);
+            hulk.frontLeft.setPower(leftspeed*(isSlow ? 0.75 : 0.5));
+            hulk.backLeft.setPower(leftspeed*(isSlow ? 0.75 : 0.5));
+            hulk.frontRight.setPower(rightspeed*(isSlow ? 0.75 : 0.5));
+            hulk.backRight.setPower(rightspeed*(isSlow ? 0.75 : 0.5));
+
+
 
          /*  if(!xMove && !yMove)  //Case: Not moving
            {
