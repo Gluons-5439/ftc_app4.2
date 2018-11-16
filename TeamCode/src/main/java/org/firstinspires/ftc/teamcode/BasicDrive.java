@@ -15,6 +15,8 @@ public class BasicDrive extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
+        boolean isSlow = false;
+        boolean liftUp = false;
         //Upon initialization maps hulk hardware
         //Turns off the color sensor LED to save battery.
       //  double pow = 1;
@@ -51,20 +53,26 @@ public class BasicDrive extends LinearOpMode {
             double gamepadXABS = (xMove ? Math.abs(gamepad1.left_stick_x) : 0);
             double speed = 0.8 * (gamepad1.left_stick_y >= 0 ? 1 : -1) * Math.sqrt(Math.pow((yMove ? gamepad1.left_stick_y : 1),2) + Math.pow(gamepadXABS, 2));
 
-            boolean isSlow = false;
-            if(gamepad1.back)
+
+            if(gamepad1.right_trigger > 0.4)
             {
-                isSlow = true;
+                isSlow = !isSlow;
             }
-            double forward = -gamepad1.left_stick_y;
+            double forward = gamepad1.left_stick_y;
             double right = gamepad1.left_stick_x;
             double leftspeed = forward - right;
             double rightspeed = forward + right;
-            hulk.frontLeft.setPower(leftspeed*(isSlow ? 0.75 : 0.5));
-            hulk.backLeft.setPower(leftspeed*(isSlow ? 0.75 : 0.5));
-            hulk.frontRight.setPower(rightspeed*(isSlow ? 0.75 : 0.5));
-            hulk.backRight.setPower(rightspeed*(isSlow ? 0.75 : 0.5));
+            hulk.frontLeft.setPower(leftspeed*(isSlow ? 0.75 :0.9));
+            hulk.backLeft.setPower(leftspeed*(isSlow ? 0.75 :0.9));
+            hulk.frontRight.setPower(rightspeed*(isSlow ? 0.75 :0.9));
+            hulk.backRight.setPower(rightspeed*(isSlow ? 0.75 :0.9));
 
+            if(gamepad1.x)
+            {
+                hulk.hangLift.setPower(liftUp?1:-1);
+                Thread.sleep(1000);
+                liftUp = !liftUp;
+            }
 
 
          /*  if(!xMove && !yMove)  //Case: Not moving
