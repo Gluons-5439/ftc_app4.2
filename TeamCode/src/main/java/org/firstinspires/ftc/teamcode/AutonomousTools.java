@@ -83,44 +83,44 @@ public class AutonomousTools {
     }
     */
 
-    //public boolean foundGold() {
-        //if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 110);
-        //return false;
-  // }
+    public boolean foundGold() {
+        if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 110);
+        return false;
+   }
 
-  // public void searchGold(boolean isCrater) throws InterruptedException { //If approaching three minerals from the centre
-      //  if (foundGold()) {
-           // moveForward((isCrater ? 350 : 700), 0.5);
-     //   }
-      //  else {
-      //      turn(45, 'r');
-      //      if (foundGold()) {
-       //         turn(45, 'r');
-        //        moveForward((isCrater ? 350 : 700), 0.5);
-        //        turn(120, 'l');
-       //         moveForward((isCrater ? 1000 : 200), 0.5);
-        //    }
-        //    else {
-         //       turn(135,'l');
-        //        moveForward((isCrater ? 750 : 1500), 0.5);
-         //       turn(60, 'r');
-        //        moveForward((isCrater ? 1000 : 2000), 0.5);
+   public void searchGold(boolean isCrater) throws InterruptedException { //If approaching three minerals from the centre
+        if (foundGold()) {
+            moveForward((isCrater ? 350 : 700), 0.5);
+        }
+        else {
+            turn(45, 'r');
+            if (foundGold()) {
+                turn(45, 'r');
+                moveForward((isCrater ? 350 : 700), 0.5);
+                turn(120, 'l');
+                moveForward((isCrater ? 1000 : 200), 0.5);
+            }
+            else {
+                turn(135,'l');
+                moveForward((isCrater ? 750 : 1500), 0.5);
+                turn(60, 'r');
+                moveForward((isCrater ? 1000 : 2000), 0.5);
 
-     //       }
-    //    }
-  // }
+            }
+        }
+   }
 
-  // public void dropMarker() throws InterruptedException {
-       // hulk.markerDrop.setPosition(0.35);
+   public void dropMarker() throws InterruptedException {
+        hulk.markerDrop.setPower(0.35);
+        Thread.sleep(250);
+        hulk.markerDrop.setPower(0);
 
-      //  hulk.markerDrop.setPosition(0);
+   }
 
-  // }
-
-   //public void pointToCrater() throws InterruptedException {         // If on same axis as crater, but just turned wrong
-     //   turn(-135 - faceDegree, 'l');
-       // moveForward(3000,0.75);
-   //}
+   public void pointToCrater() throws InterruptedException {         // If on same axis as crater, but just turned wrong
+        turn(-135 - faceDegree, 'l');
+        moveForward(3000,0.75);
+   }
 
 
 

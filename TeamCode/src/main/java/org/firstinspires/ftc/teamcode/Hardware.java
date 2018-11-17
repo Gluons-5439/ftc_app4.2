@@ -22,9 +22,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 public class Hardware {
 
-    //ColorSensor mineralSensor;
-  //  Servo sensorDrop = null;
-  //  Servo markerDrop = null;
+    ColorSensor mineralSensor;
+    CRServo sensorDrop;
+    CRServo markerDrop;
 
     DcMotor frontRight;         //Hub 3 Motor 0
     DcMotor frontLeft;          //Hub 3 Motor 1
@@ -74,11 +74,11 @@ public class Hardware {
             // rollerLift = hwMap.dcMotor.get("rollerLift");
             hangLift2 = hwMap.dcMotor.get("hangLift2");
             hangLift = hwMap.dcMotor.get("hangLift");
-          //  markerDrop = hwMap.servo.get("markerDrop");
-          //  sensorDrop = hwMap.servo.get("sensorDrop");
+            markerDrop = hwMap.crservo.get("markerDrop");
+            sensorDrop = hwMap.crservo.get("sensorDrop");
             // spin = hwMap.dcMotor.get("spin");
 
-           // mineralSensor = hwMap.colorSensor.get("mineralSensor");
+            mineralSensor = hwMap.colorSensor.get("mineralSensor");
         }
 
         private void initMotorSettings () {
@@ -97,8 +97,8 @@ public class Hardware {
             frontRight.setDirection(DcMotor.Direction.FORWARD);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
             backRight.setDirection(DcMotor.Direction.FORWARD);
-        //    markerDrop.setDirection(Servo.Direction.FORWARD);
-        //    sensorDrop.setDirection(Servo.Direction.FORWARD);
+
+
 
             // rollerLift.setDirection(DcMotor.Direction.FORWARD);
             hangLift.setDirection(DcMotor.Direction.FORWARD);
@@ -114,12 +114,12 @@ public class Hardware {
             backLeft.setPower(0);
             hangLift.setPower(0);
             hangLift2.setPower(0);
-         //   markerDrop.setPosition(0);
-        //    sensorDrop.setPosition(0);
+            markerDrop.setPower(0);
+            sensorDrop.setPower(0);
 
             // rollerLift.setPower(0);
             // spin.setPower(0);
-          //  mineralSensor.enableLed(false);
+             mineralSensor.enableLed(false);
         }
 
         public void waitForTick (long periodMs) throws InterruptedException {

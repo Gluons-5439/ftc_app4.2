@@ -8,6 +8,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "BlueTeamByRelic", group = "Autonomous")
+@Disabled
 public class BlueTeamByRelicMap extends LinearOpMode {
     Hardware robot = new Hardware();
 
