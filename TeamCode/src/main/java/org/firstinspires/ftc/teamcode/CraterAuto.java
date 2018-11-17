@@ -34,7 +34,7 @@ public class CraterAuto extends LinearOpMode {
         waitForStart();
 
 
-        t.searchGold(true);
+        //t.searchGold(true);
         //Run whatever we need to run for crater autonomous
 
     }

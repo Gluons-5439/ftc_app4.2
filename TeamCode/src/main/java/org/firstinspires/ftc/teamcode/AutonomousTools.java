@@ -17,7 +17,11 @@ public class AutonomousTools {
     Hardware hulk = new Hardware();
     final double MAX_WHEEL_VELOCITY = 0.77203;
     public boolean liftPos = false;
-    public boolean lightOn = false;
+    public boolean lightOn = true;
+
+    public AutonomousTools() {
+
+    }
 
     public boolean onCraterSide = false;
     public int faceDegree = 0;          // Degree relative to direction it faces when landing ON DEPOT SIDE (crater side is -90) left - , right +
@@ -42,6 +46,9 @@ public class AutonomousTools {
         hulk.backRight.setPower(-speed);
         Thread.sleep(moveTime);
 
+    }
+    public void setFaceDegree(int x) {
+        faceDegree = x;
     }
 
     public void turn(int degrees, char dir) throws InterruptedException {
@@ -76,44 +83,44 @@ public class AutonomousTools {
     }
     */
 
-    public boolean foundGold() {
-        if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 110);
-        return false;
-   }
+    //public boolean foundGold() {
+        //if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 110);
+        //return false;
+  // }
 
-   public void searchGold(boolean isCrater) throws InterruptedException {              //If approaching three minerals from the centre
-        if (foundGold()) {
-            moveForward((isCrater ? 350 : 700), 0.5);
-        }
-        else {
-            turn(45, 'r');
-            if (foundGold()) {
-                turn(45, 'r');
-                moveForward((isCrater ? 350 : 700), 0.5);
-                turn(120, 'l');
-                moveForward((isCrater ? 1000 : 200), 0.5);
-            }
-            else {
-                turn(135,'l');
-                moveForward((isCrater ? 750 : 1500), 0.5);
-                turn(60, 'r');
-                moveForward((isCrater ? 1000 : 2000), 0.5);
-            }
-        }
-   }
+  // public void searchGold(boolean isCrater) throws InterruptedException { //If approaching three minerals from the centre
+      //  if (foundGold()) {
+           // moveForward((isCrater ? 350 : 700), 0.5);
+     //   }
+      //  else {
+      //      turn(45, 'r');
+      //      if (foundGold()) {
+       //         turn(45, 'r');
+        //        moveForward((isCrater ? 350 : 700), 0.5);
+        //        turn(120, 'l');
+       //         moveForward((isCrater ? 1000 : 200), 0.5);
+        //    }
+        //    else {
+         //       turn(135,'l');
+        //        moveForward((isCrater ? 750 : 1500), 0.5);
+         //       turn(60, 'r');
+        //        moveForward((isCrater ? 1000 : 2000), 0.5);
 
-   public void dropMarker() throws InterruptedException {
-        hulk.markerDrop.setPower(0.35);
-        Thread.sleep(400);
-        hulk.markerDrop.setPower(-0.35);
-        Thread.sleep(400);
-        hulk.markerDrop.setPower(0);
-   }
+     //       }
+    //    }
+  // }
 
-   public void pointToCrater() throws InterruptedException {         // If on same axis as crater, but just turned wrong
-        turn(-135 - faceDegree, 'l');
-        moveForward(3000,0.75);
-   }
+  // public void dropMarker() throws InterruptedException {
+       // hulk.markerDrop.setPosition(0.35);
+
+      //  hulk.markerDrop.setPosition(0);
+
+  // }
+
+   //public void pointToCrater() throws InterruptedException {         // If on same axis as crater, but just turned wrong
+     //   turn(-135 - faceDegree, 'l');
+       // moveForward(3000,0.75);
+   //}
 
 
 

@@ -22,9 +22,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 public class Hardware {
 
-    ColorSensor mineralSensor;
-    CRServo sensorDrop;
-    CRServo markerDrop;
+    //ColorSensor mineralSensor;
+  //  Servo sensorDrop = null;
+  //  Servo markerDrop = null;
 
     DcMotor frontRight;         //Hub 3 Motor 0
     DcMotor frontLeft;          //Hub 3 Motor 1
@@ -39,7 +39,7 @@ public class Hardware {
     //DcMotor spin;
 
 
-    HardwareMap hwMap = null;
+    HardwareMap hwMap;
     private ElapsedTime period = new ElapsedTime();
     static final int tickSpeed = 1120, distanceFromCentermm = 203;
     static final double wheelCircumferencemm = 159.5929;
@@ -72,13 +72,13 @@ public class Hardware {
             backRight = hwMap.dcMotor.get("backRight");
 
             // rollerLift = hwMap.dcMotor.get("rollerLift");
-            hangLift = hwMap.dcMotor.get("hangLift2");
+            hangLift2 = hwMap.dcMotor.get("hangLift2");
             hangLift = hwMap.dcMotor.get("hangLift");
-            markerDrop = hwMap.crservo.get("markerDrop");
-            sensorDrop = hwMap.crservo.get("sensorDrop");
+          //  markerDrop = hwMap.servo.get("markerDrop");
+          //  sensorDrop = hwMap.servo.get("sensorDrop");
             // spin = hwMap.dcMotor.get("spin");
 
-            mineralSensor = hwMap.colorSensor.get("mineralSensor");
+           // mineralSensor = hwMap.colorSensor.get("mineralSensor");
         }
 
         private void initMotorSettings () {
@@ -89,6 +89,7 @@ public class Hardware {
 
             // rollerLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             hangLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            hangLift2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             // spin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
@@ -96,6 +97,8 @@ public class Hardware {
             frontRight.setDirection(DcMotor.Direction.FORWARD);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
             backRight.setDirection(DcMotor.Direction.FORWARD);
+        //    markerDrop.setDirection(Servo.Direction.FORWARD);
+        //    sensorDrop.setDirection(Servo.Direction.FORWARD);
 
             // rollerLift.setDirection(DcMotor.Direction.FORWARD);
             hangLift.setDirection(DcMotor.Direction.FORWARD);
@@ -110,12 +113,13 @@ public class Hardware {
             backRight.setPower(0);
             backLeft.setPower(0);
             hangLift.setPower(0);
-            markerDrop.setPower(0);
-            sensorDrop.setPower(0);
+            hangLift2.setPower(0);
+         //   markerDrop.setPosition(0);
+        //    sensorDrop.setPosition(0);
 
             // rollerLift.setPower(0);
             // spin.setPower(0);
-            mineralSensor.enableLed(false);
+          //  mineralSensor.enableLed(false);
         }
 
         public void waitForTick (long periodMs) throws InterruptedException {

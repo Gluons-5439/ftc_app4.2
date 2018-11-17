@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 public class BasicDrive extends LinearOpMode {
     Hardware hulk = new Hardware();
     //Creates hulk object
-    AutonomousTools t = new AutonomousTools();
+     AutonomousTools t = new AutonomousTools();
     //Declares gyro
 
 
@@ -48,29 +48,29 @@ public class BasicDrive extends LinearOpMode {
             boolean xMove = gamepad1.left_stick_x > 0.1 || gamepad1.left_stick_x < -0.1;
             boolean yMove = gamepad1.left_stick_y > 0.1 || gamepad1.left_stick_y < -0.1;
 
-            double rightPower = 0,
-                   leftPower = 0;
-            double gamepadXABS = (xMove ? Math.abs(gamepad1.left_stick_x) : 0);
-            double speed = 0.8 * (gamepad1.left_stick_y >= 0 ? 1 : -1) * Math.sqrt(Math.pow((yMove ? gamepad1.left_stick_y : 1),2) + Math.pow(gamepadXABS, 2));
+
+            //double gamepadXABS = (xMove ? Math.abs(gamepad1.left_stick_x) : 0);
+            //double speed = 0.8 * (gamepad1.left_stick_y >= 0 ? 1 : -1) * Math.sqrt(Math.pow((yMove ? gamepad1.left_stick_y : 1),2) + Math.pow(gamepadXABS, 2));
 
 
             if(gamepad1.right_trigger > 0.4)
             {
                 isSlow = !isSlow;
             }
-            double forward = gamepad1.left_stick_y;
+            double forward = -gamepad1.left_stick_y;
             double right = gamepad1.left_stick_x;
             double leftspeed = forward - right;
             double rightspeed = forward + right;
-            hulk.frontLeft.setPower(leftspeed*(isSlow ? 0.75 :0.9));
-            hulk.backLeft.setPower(leftspeed*(isSlow ? 0.75 :0.9));
-            hulk.frontRight.setPower(rightspeed*(isSlow ? 0.75 :0.9));
-            hulk.backRight.setPower(rightspeed*(isSlow ? 0.75 :0.9));
+            hulk.frontLeft.setPower(leftspeed * (isSlow ? 0.75 : 0.9));
+            hulk.backLeft.setPower(leftspeed * (isSlow ? 0.75 : 0.9));
+
+            hulk.frontRight.setPower(rightspeed*(isSlow ? 0.75 : 0.9));
+            hulk.backRight.setPower(rightspeed*(isSlow ? 0.75 : 0.9));
 
             if(gamepad1.x)
             {
-                hulk.hangLift.setPower(liftUp?1:-1);
-                hulk.hangLift2.setPower(liftUp?1:-1);
+                hulk.hangLift.setPower(liftUp ? 1 : -1);
+                hulk.hangLift2.setPower(liftUp ? 1 : -1);
                 Thread.sleep(1000);
                 liftUp = !liftUp;
             }
@@ -234,14 +234,14 @@ public class BasicDrive extends LinearOpMode {
 
             telemetry.addLine("ACCESSORIES");
             // telemetry.addData("LIFT Power: ", hulk.rollerLift.getPower());
-            telemetry.addData("COLOR SENSOR Color:", hulk.mineralSensor.argb());
-            telemetry.addLine("COLOR SENSOR:");
-            telemetry.addData("  ARGB Hex value: ", hulk.mineralSensor.argb());
-            telemetry.addData("  RED value: ", hulk.mineralSensor.red());
-            telemetry.addData("  GREEN value: ", hulk.mineralSensor.green());
-            telemetry.addData("  BLUE value: ", hulk.mineralSensor.blue());
-            telemetry.addLine("FOUND GOLD: " + (t.foundGold() ? "TRUE" : "FALSE"));
-            telemetry.addLine("COLOR SENSOR " + (t.lightOn ? "ON" : "OFF"));
+            // telemetry.addData("COLOR SENSOR Color:", (hulk.mineralSensor.argb());
+            //telemetry.addLine("COLOR SENSOR:");
+            //telemetry.addData("  ARGB Hex value: ", hulk.mineralSensor.argb());
+            //telemetry.addData("  RED value: ", hulk.mineralSensor.red());
+            //telemetry.addData("  GREEN value: ", hulk.mineralSensor.green());
+            //telemetry.addData("  BLUE value: ", hulk.mineralSensor.blue());
+            // telemetry.addLine("FOUND GOLD: " + (t.foundGold() ? "TRUE" : "FALSE"));
+            // telemetry.addLine("COLOR SENSOR " + (t.lightOn ? "ON" : "OFF"));
             telemetry.addLine();
             telemetry.addLine();
 
