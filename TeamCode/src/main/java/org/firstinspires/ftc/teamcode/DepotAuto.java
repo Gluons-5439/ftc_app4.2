@@ -46,6 +46,8 @@ public class DepotAuto extends LinearOpMode {
         t.turn(90,'r');
         /** Block Sense **/
 
+        t.searchGold(false);
+
         /*
         hulk.mineralSensor.enableLed(true);
         //servo drop

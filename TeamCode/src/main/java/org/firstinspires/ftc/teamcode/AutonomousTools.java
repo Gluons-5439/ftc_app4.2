@@ -72,10 +72,31 @@ public class AutonomousTools {
     }
     */
 
-   // public boolean foundGold() {
-   //     if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 100);
-    //    return false;
-   // }
+    public boolean foundGold() {
+        if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 100);
+        return false;
+   }
+
+   public void searchGold(boolean isCrater) throws InterruptedException {              //If approaching three minerals from the centre
+        if (foundGold()) {
+            moveForward(2000, 0.8);
+        }
+        else {
+            turn(45, 'r');
+            if (foundGold()) {
+                turn(45, 'r');
+                moveForward((isCrater ? 350 : 700), 0.8);
+                turn(120, 'l');
+                moveForward((isCrater ? 1000 : 200), 0.8);
+            }
+            else {
+                turn(135,'l');
+                moveForward((isCrater ? 750 : 1500), 0.8);
+                turn(60, 'r');
+                moveForward((isCrater ? 1000 : 2000), 0.8);
+            }
+        }
+   }
 
 
 
