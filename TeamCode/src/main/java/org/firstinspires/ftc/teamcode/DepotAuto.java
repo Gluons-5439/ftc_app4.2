@@ -44,6 +44,7 @@ public class DepotAuto extends LinearOpMode {
         Thread.sleep(200);
         hulk.hangLift.setPower(0); **/
         t.turn(90,'r');
+        t.faceDegree = 0;
         /** Block Sense **/
 
         hulk.sensorDrop.setPower(0.35);
