@@ -46,6 +46,12 @@ public class DepotAuto extends LinearOpMode {
         t.turn(90,'r');
         /** Block Sense **/
 
+        //hulk.sensorDrop.setPosition(0.5);
+
+        t.moveForward(100,P);
+       // if()
+
+
         t.searchGold(false);
 
         /*

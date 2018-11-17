@@ -110,6 +110,7 @@ public class Hardware {
            // marker
            // Drop.setPosition(0);
             sensorDrop.setPosition(0);
+
             // rollerLift.setPower(0);
             // spin.setPower(0);
             mineralSensor.enableLed(false);
