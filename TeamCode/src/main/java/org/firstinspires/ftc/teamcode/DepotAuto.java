@@ -51,6 +51,10 @@ public class DepotAuto extends LinearOpMode {
         hulk.sensorDrop.setPower(0);
         hulk.mineralSensor.enableLed(true);
         t.searchGold(false);
+        t.pointToCrater();
+        t.moveForward(200, 0.2);
+        t.dropMarker();
+        t.moveForward(3000, 0.6);
 
         /*
         hulk.mineralSensor.enableLed(true);

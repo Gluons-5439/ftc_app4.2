@@ -19,6 +19,9 @@ public class AutonomousTools {
     public boolean liftPos = false;
     public boolean lightOn = false;
 
+    public boolean onCraterSide = false;
+    public int faceDegree = 0;          // Degree relative to direction it faces when landing ON DEPOT SIDE (crater side is -90) left - , right +
+
     public void moveForward(int moveTime, double speed) throws InterruptedException {
         hulk.frontLeft.setPower(speed);
         hulk.frontRight.setPower(speed);
@@ -57,6 +60,7 @@ public class AutonomousTools {
             hulk.backRight.setPower(1);
         }
         Thread.sleep(time);
+        faceDegree += (dir == 'r' ? 1 : -1) * degrees;
     }
 
    /* public void changeRollerLift(boolean up) throws InterruptedException { //if up is true, it is up, so the lift needs to go down, else, it goes up
@@ -104,6 +108,11 @@ public class AutonomousTools {
         hulk.markerDrop.setPower(-0.35);
         Thread.sleep(400);
         hulk.markerDrop.setPower(0);
+   }
+
+   public void pointToCrater() throws InterruptedException {         // If on same axis as crater, but just turned wrong
+        turn(-135 - faceDegree, 'l');
+        moveForward(3000,0.75);
    }
 
 
