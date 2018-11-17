@@ -35,6 +35,7 @@ public class Hardware {
 
    // DcMotor rollerLift;
     DcMotor hangLift;           //Hub 2
+    DcMotor hangLift2;          //Hub 3
     //DcMotor spin;
 
 
@@ -71,6 +72,7 @@ public class Hardware {
             backRight = hwMap.dcMotor.get("backRight");
 
             // rollerLift = hwMap.dcMotor.get("rollerLift");
+            hangLift = hwMap.dcMotor.get("hangLift2");
             hangLift = hwMap.dcMotor.get("hangLift");
             markerDrop = hwMap.crservo.get("markerDrop");
             sensorDrop = hwMap.crservo.get("sensorDrop");
@@ -97,6 +99,7 @@ public class Hardware {
 
             // rollerLift.setDirection(DcMotor.Direction.FORWARD);
             hangLift.setDirection(DcMotor.Direction.FORWARD);
+            hangLift2.setDirection(DcMotor.Direction.FORWARD);
             // spin.setDirection(DcMotor.Direction.FORWARD);
 
         }
@@ -106,9 +109,8 @@ public class Hardware {
             frontRight.setPower(0);
             backRight.setPower(0);
             backLeft.setPower(0);
-            hangLift.setPower(-0.01);
-           // marker
-           // Drop.setPosition(0);
+            hangLift.setPower(0);
+            markerDrop.setPower(0);
             sensorDrop.setPower(0);
 
             // rollerLift.setPower(0);

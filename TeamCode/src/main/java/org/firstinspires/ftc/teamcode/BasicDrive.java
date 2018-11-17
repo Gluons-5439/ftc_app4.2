@@ -70,6 +70,7 @@ public class BasicDrive extends LinearOpMode {
             if(gamepad1.x)
             {
                 hulk.hangLift.setPower(liftUp?1:-1);
+                hulk.hangLift2.setPower(liftUp?1:-1);
                 Thread.sleep(1000);
                 liftUp = !liftUp;
             }

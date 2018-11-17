@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 public class CraterAuto extends LinearOpMode {
     Hardware robot = new Hardware();
     VuforiaLocalizer vuforia;
-
+    AutonomousTools t = new AutonomousTools();
 
 
     public void runOpMode() throws InterruptedException {
@@ -33,6 +33,8 @@ public class CraterAuto extends LinearOpMode {
 
         waitForStart();
 
+
+        t.searchGold(true);
         //Run whatever we need to run for crater autonomous
 
     }
