@@ -23,8 +23,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 public class Hardware {
 
     ColorSensor mineralSensor;
-    Servo sensorDrop;
-    Servo markerDrop;
+    CRServo sensorDrop;
+    CRServo markerDrop;
 
     DcMotor frontRight;         //Hub 3 Motor 0
     DcMotor frontLeft;          //Hub 3 Motor 1
@@ -72,8 +72,8 @@ public class Hardware {
 
             // rollerLift = hwMap.dcMotor.get("rollerLift");
             hangLift = hwMap.dcMotor.get("hangLift");
-            markerDrop = hwMap.servo.get("markerDrop");
-            sensorDrop = hwMap.servo.get("sensorDrop");
+            markerDrop = hwMap.crservo.get("markerDrop");
+            sensorDrop = hwMap.crservo.get("sensorDrop");
             // spin = hwMap.dcMotor.get("spin");
 
             mineralSensor = hwMap.colorSensor.get("mineralSensor");
@@ -109,7 +109,7 @@ public class Hardware {
             hangLift.setPower(-0.01);
            // marker
            // Drop.setPosition(0);
-            sensorDrop.setPosition(0);
+            sensorDrop.setPower(0);
 
             // rollerLift.setPower(0);
             // spin.setPower(0);

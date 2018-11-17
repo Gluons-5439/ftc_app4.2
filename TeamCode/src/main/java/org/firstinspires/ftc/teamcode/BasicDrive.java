@@ -232,14 +232,14 @@ public class BasicDrive extends LinearOpMode {
             //telemetry.addLine();
 
             telemetry.addLine("ACCESSORIES");
-       //     telemetry.addData("LIFT Power: ", hulk.rollerLift.getPower());
-       //     telemetry.addData("COLOR SENSOR Color:", hulk.mineralSensor.argb());
+            // telemetry.addData("LIFT Power: ", hulk.rollerLift.getPower());
+            telemetry.addData("COLOR SENSOR Color:", hulk.mineralSensor.argb());
             telemetry.addLine("COLOR SENSOR:");
-       //     telemetry.addData("  ARGB Hex value: ", hulk.mineralSensor.argb());
-       //     telemetry.addData("  RED value: ", hulk.mineralSensor.red());
-       //     telemetry.addData("  GREEN value: ", hulk.mineralSensor.green());
-       //     telemetry.addData("  BLUE value: ", hulk.mineralSensor.blue());
-      //      telemetry.addLine("FOUND GOLD: " + (t.foundGold() ? "TRUE" : "FALSE"));
+            telemetry.addData("  ARGB Hex value: ", hulk.mineralSensor.argb());
+            telemetry.addData("  RED value: ", hulk.mineralSensor.red());
+            telemetry.addData("  GREEN value: ", hulk.mineralSensor.green());
+            telemetry.addData("  BLUE value: ", hulk.mineralSensor.blue());
+            telemetry.addLine("FOUND GOLD: " + (t.foundGold() ? "TRUE" : "FALSE"));
             telemetry.addLine("COLOR SENSOR " + (t.lightOn ? "ON" : "OFF"));
             telemetry.addLine();
             telemetry.addLine();

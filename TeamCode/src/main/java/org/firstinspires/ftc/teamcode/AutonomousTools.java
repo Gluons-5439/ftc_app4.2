@@ -45,16 +45,16 @@ public class AutonomousTools {
         final double TURN_RADIUS = 0.26043;     //Radius of the circle whose circumference the wheels will follow when turning on its axis (in metres)
         int time = (int)((TURN_RADIUS * Math.abs(degrees)) / MAX_WHEEL_VELOCITY) * 1000;
         if (dir == 'l') {
-            hulk.frontLeft.setPower(-1);
-            hulk.frontRight.setPower(1);
-            hulk.backLeft.setPower(-1);
-            hulk.backRight.setPower(1);
-        }
-        else if (dir == 'r'){
             hulk.frontLeft.setPower(1);
             hulk.frontRight.setPower(-1);
             hulk.backLeft.setPower(1);
             hulk.backRight.setPower(-1);
+        }
+        else if (dir == 'r'){
+            hulk.frontLeft.setPower(-1);
+            hulk.frontRight.setPower(1);
+            hulk.backLeft.setPower(-1);
+            hulk.backRight.setPower(1);
         }
         Thread.sleep(time);
     }
@@ -73,29 +73,37 @@ public class AutonomousTools {
     */
 
     public boolean foundGold() {
-        if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 100);
+        if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 110);
         return false;
    }
 
    public void searchGold(boolean isCrater) throws InterruptedException {              //If approaching three minerals from the centre
         if (foundGold()) {
-            moveForward(2000, 0.8);
+            moveForward((isCrater ? 350 : 700), 0.5);
         }
         else {
             turn(45, 'r');
             if (foundGold()) {
                 turn(45, 'r');
-                moveForward((isCrater ? 350 : 700), 0.8);
+                moveForward((isCrater ? 350 : 700), 0.5);
                 turn(120, 'l');
-                moveForward((isCrater ? 1000 : 200), 0.8);
+                moveForward((isCrater ? 1000 : 200), 0.5);
             }
             else {
                 turn(135,'l');
-                moveForward((isCrater ? 750 : 1500), 0.8);
+                moveForward((isCrater ? 750 : 1500), 0.5);
                 turn(60, 'r');
-                moveForward((isCrater ? 1000 : 2000), 0.8);
+                moveForward((isCrater ? 1000 : 2000), 0.5);
             }
         }
+   }
+
+   public void dropMarker() throws InterruptedException {
+        hulk.markerDrop.setPower(0.35);
+        Thread.sleep(400);
+        hulk.markerDrop.setPower(-0.35);
+        Thread.sleep(400);
+        hulk.markerDrop.setPower(0);
    }
 
 

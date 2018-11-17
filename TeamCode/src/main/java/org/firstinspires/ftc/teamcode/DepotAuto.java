@@ -35,23 +35,21 @@ public class DepotAuto extends LinearOpMode {
         waitForStart();
 
 
-       /** Unhook **/
+       /** Unhook
         hulk.hangLift.setPower(0.1);
         Thread.sleep(200);
         hulk.hangLift.setPower(0);
         t.moveBackward(100,P);
         hulk.hangLift.setPower(-0.1);
         Thread.sleep(200);
-        hulk.hangLift.setPower(0);
+        hulk.hangLift.setPower(0); **/
         t.turn(90,'r');
         /** Block Sense **/
 
-        //hulk.sensorDrop.setPosition(0.5);
-
-        t.moveForward(100,P);
-       // if()
-
-
+        hulk.sensorDrop.setPower(0.35);
+        Thread.sleep(400);
+        hulk.sensorDrop.setPower(0);
+        hulk.mineralSensor.enableLed(true);
         t.searchGold(false);
 
         /*
