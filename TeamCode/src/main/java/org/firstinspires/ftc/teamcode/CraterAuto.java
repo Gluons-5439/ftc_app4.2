@@ -15,7 +15,7 @@ public class CraterAuto extends LinearOpMode {
     VuforiaLocalizer vuforia;
     AutonomousTools t = new AutonomousTools();
     final double MAX_WHEEL_VELOCITY = 0.77203;
-    int faceDegree = 0;
+    int faceDegree = -135;
 
 
     public void runOpMode() throws InterruptedException {
@@ -23,14 +23,9 @@ public class CraterAuto extends LinearOpMode {
 
         final double P = 0.5;
 
-
         waitForStart();
 
-
-        moveForward(2000, 0.3);
-
-
-        //Run whatever we need to run for crater autonomous
+        moveForward(1500, 0.5);
 
     }
 

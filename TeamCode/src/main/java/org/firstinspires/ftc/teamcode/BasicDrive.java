@@ -64,8 +64,8 @@ public class BasicDrive extends LinearOpMode {
             hulk.frontLeft.setPower(leftspeed * (isSlow ? 0.75 : 0.9));
             hulk.backLeft.setPower(leftspeed * (isSlow ? 0.75 : 0.9));
 
-            hulk.frontRight.setPower(rightspeed*(isSlow ? 0.75 : 0.9));
-            hulk.backRight.setPower(rightspeed*(isSlow ? 0.75 : 0.9));
+            hulk.frontRight.setPower(rightspeed * (isSlow ? 0.75 : 0.9));
+            hulk.backRight.setPower(rightspeed * (isSlow ? 0.75 : 0.9));
 
             if(gamepad1.x)
             {
@@ -136,8 +136,8 @@ public class BasicDrive extends LinearOpMode {
                     leftPower = gamepad1.left_stick_x;
                     rightPower = -gamepad1.left_stick_x;
             }
-            hulk.frontLeft.setPower(leftPower * speed);                // CONDITION 3 (direction determined in variable speed (y-axis))
-            hulk.frontRight.setPower(rightPower * speed);             // Negative to account for opposing wheel directions
+            hulk.frontLeft.setPower(leftPower * speed);                 // CONDITION 3 (direction determined in variable speed (y-axis))
+            hulk.frontRight.setPower(rightPower * speed);               // Negative to account for opposing wheel directions
             hulk.backLeft.setPower(leftPower * speed);
             hulk.backRight.setPower(rightPower * speed);
 
