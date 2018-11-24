@@ -51,19 +51,19 @@ public class DepotAuto extends LinearOpMode {
         /* Block Sense */
 
 
-        moveForward(1700,0.3);
+        t.moveForward(1700, 0.3);
 
         //turn(45/.0,'l');  //45/9 = 90
-        turnTemp(1125, 'l');
+        t.turnTemp(1125, 'l');
         //0Thread.sleep(1000);
         hulk.markerDrop.setPower(0.5);
         Thread.sleep(600);
         hulk.markerDrop.setPower(0);
-        moveForward(200,0.3);
-        moveForward(1400,0.3);
+        t.moveForward(200, 0.3);
+        t.moveForward(1400, 0.3);
         // turn(45/9,'l');  //45/9 = 90
         //turnTemp(225, 'r');
-        moveForward(2750,0.3);
+        t.moveForward(2750, 0.3);
         //turn(45/36.0,'r');  //45/9 = 90
 
 
@@ -75,56 +75,6 @@ public class DepotAuto extends LinearOpMode {
         t.moveForward(3000, 0.6);
         */
 
-    }
-    public void moveForward(int moveTime, double speed) throws InterruptedException {
-        hulk.frontLeft.setPower(speed);
-        hulk.frontRight.setPower(speed);
-        hulk.backLeft.setPower(speed);
-        hulk.backRight.setPower(speed);
-        Thread.sleep(moveTime);
-    }
-    public void turn(double degrees, char dir) throws InterruptedException {
-        final double TURN_RADIUS = 0.26043;     //Radius of the circle whose circumference the wheels will follow when turning on its axis (in metres)
-        // AFTER MEET, CHANGE TURN_RADIUS TO 0.345, AND CONTINUE TESTING
-        int time = (int)((TURN_RADIUS * Math.abs(degrees)) / MAX_WHEEL_VELOCITY) * 1000;
-        if (dir == 'l') {
-            hulk.frontLeft.setPower(1);
-            hulk.frontRight.setPower(-1);
-            hulk.backLeft.setPower(1);
-            hulk.backRight.setPower(-1);
-        }
-        else if (dir == 'r'){
-            hulk.frontLeft.setPower(-1);
-            hulk.frontRight.setPower(1);
-            hulk.backLeft.setPower(-1);
-            hulk.backRight.setPower(1);
-        }
-        Thread.sleep(time);
-        hulk.frontLeft.setPower(0);
-        hulk.frontRight.setPower(0);
-        hulk.backLeft.setPower(0);
-        hulk.backRight.setPower(0);
-        faceDegree += (dir == 'r' ? 1 : -1) * degrees;
-    }
-
-    public void turnTemp(int time, char dir) throws InterruptedException {
-        if (dir == 'l') {
-            hulk.frontLeft.setPower(1);
-            hulk.frontRight.setPower(-1);
-            hulk.backLeft.setPower(1);
-            hulk.backRight.setPower(-1);
-        }
-        else if (dir == 'r'){
-            hulk.frontLeft.setPower(-1);
-            hulk.frontRight.setPower(1);
-            hulk.backLeft.setPower(-1);
-            hulk.backRight.setPower(1);
-        }
-        Thread.sleep(time);
-        hulk.frontLeft.setPower(0);
-        hulk.frontRight.setPower(0);
-        hulk.backLeft.setPower(0);
-        hulk.backRight.setPower(0);
     }
 }
 

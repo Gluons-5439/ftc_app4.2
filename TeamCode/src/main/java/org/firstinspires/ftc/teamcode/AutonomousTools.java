@@ -73,7 +73,7 @@ public class AutonomousTools {
 
     public void turn(int degrees, char dir) throws InterruptedException {
         final double TURN_RADIUS = 0.26043;     //Radius of the circle whose circumference the wheels will follow when turning on its axis (in metres)
-        int time = (int)((TURN_RADIUS * Math.abs(degrees)) / MAX_WHEEL_VELOCITY) * 1000;
+        int time = (int)((TURN_RADIUS * Math.abs(degrees) * Math.PI / 180) / MAX_WHEEL_VELOCITY) * 1000;
         if (dir == 'l') {
             hulk.frontLeft.setPower(1);
             hulk.frontRight.setPower(-1);
@@ -88,6 +88,11 @@ public class AutonomousTools {
         }
         Thread.sleep(time);
         faceDegree += (dir == 'r' ? 1 : -1) * degrees;
+        Thread.sleep(time);
+        hulk.frontLeft.setPower(0);
+        hulk.frontRight.setPower(0);
+        hulk.backLeft.setPower(0);
+        hulk.backRight.setPower(0);
     }
 
    /* public void changeRollerLift(boolean up) throws InterruptedException { //if up is true, it is up, so the lift needs to go down, else, it goes up
@@ -142,7 +147,25 @@ public class AutonomousTools {
         moveForward(3000,0.75);
    }
 
-
+    public void turnTemp(int time, char dir) throws InterruptedException {
+        if (dir == 'l') {
+            hulk.frontLeft.setPower(1);
+            hulk.frontRight.setPower(-1);
+            hulk.backLeft.setPower(1);
+            hulk.backRight.setPower(-1);
+        }
+        else if (dir == 'r'){
+            hulk.frontLeft.setPower(-1);
+            hulk.frontRight.setPower(1);
+            hulk.backLeft.setPower(-1);
+            hulk.backRight.setPower(1);
+        }
+        Thread.sleep(time);
+        hulk.frontLeft.setPower(0);
+        hulk.frontRight.setPower(0);
+        hulk.backLeft.setPower(0);
+        hulk.backRight.setPower(0);
+    }
 
 
 
