@@ -6,10 +6,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Depot", group = "Autonomous")
 public class DepotAuto extends LinearOpMode {
     Hardware hulk = new Hardware();
+    VuforiaLocalizer vuforia;
+    TFObjectDetector tfod;
     AutonomousTools t = new AutonomousTools();
     final double MAX_WHEEL_VELOCITY = 0.77203;
     int faceDegree = 0;

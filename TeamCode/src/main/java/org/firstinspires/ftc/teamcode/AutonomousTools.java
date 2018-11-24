@@ -8,9 +8,11 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 
 public class AutonomousTools {
@@ -18,6 +20,9 @@ public class AutonomousTools {
     final double MAX_WHEEL_VELOCITY = 0.77203;
     public boolean liftPos = false;
     public boolean lightOn = true;
+    static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
+    static final String LABEL_GOLD_MINERAL = "Gold Mineral";
+    static final String LABEL_SILVER_MINERAL = "Silver Mineral";
 
     public AutonomousTools() {
 
@@ -33,12 +38,27 @@ public class AutonomousTools {
         hulk.backRight.setPower(speed);
         Thread.sleep(moveTime);
     }
-    //public static void main(String args[])
-   // {
+    public void initVuforia(VuforiaLocalizer vuforia) {
+        /*
+         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
+         */
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
 
+        parameters.vuforiaLicenseKey = "AfmBbcz/////AAAAGbLGg++zzk4MiOrcPTc3t9xQj3QHfISJprebOgt5JJ4+83xtFO+ApGlI3GVY/aMgCpoGEIzaJse9sXiYDiLYpJQlGDX765tWJUrqM+pzqLxVXjWA1J6c968/YqYq74Vq5emNxGHj5SF3HP3m43Iq/YYgkSdMv4BR+RThPPnIIzrbAjEAHHtMgH7vVh036+bcw9UqBfSdD/IBqrKpJLERn5+Qi/4Q4EoReCC0CTDfZ+LcY0rUur0QZRkMpxx/9s4eCgIU+qfOcSlBvjoX7QAQ2MImUME1y5yJiyaWueamnhRBOwERGBuDKyGp4eBWp4i3esJcplrWYovjzPg9fL7Thy8v9KnrHy22PUFAYY+1vjKp";
+        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
 
+        //  Instantiate the Vuforia engine
+        vuforia = ClassFactory.getInstance().createVuforia(parameters);
 
-  //  }
+        // Loading trackables is not necessary for the Tensor Flow Object Detection engine.
+    }
+    public void initTfod(TFObjectDetector tfod, HardwareMap hardwareMap, VuforiaLocalizer vuforia) {
+        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
+        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_GOLD_MINERAL, LABEL_SILVER_MINERAL);
+    }
+
     public void moveBackward(int moveTime, double speed) throws InterruptedException {
         hulk.frontLeft.setPower(-speed);
         hulk.frontRight.setPower(-speed);

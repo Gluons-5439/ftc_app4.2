@@ -38,13 +38,12 @@ public class Hardware {
     DcMotor hangLift2;          //Hub 3
     //DcMotor spin;
 
-
     HardwareMap hwMap;
     private ElapsedTime period = new ElapsedTime();
     static final int tickSpeed = 1120, distanceFromCentermm = 203;
     static final double wheelCircumferencemm = 159.5929;
 
-
+    VuforiaTrackables vuforia;
         public Hardware(){
 
         }
@@ -56,6 +55,7 @@ public class Hardware {
             initMotorSettings();
             initDefaultPosition();
         }
+
 
         private void initDevices () {
             imu = hwMap.get(BNO055IMU.class, "gyro");

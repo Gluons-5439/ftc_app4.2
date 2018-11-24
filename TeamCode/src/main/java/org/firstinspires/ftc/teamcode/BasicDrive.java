@@ -5,13 +5,23 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+
+import java.util.List;
+
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Basic Drive", group = "TeleOp")
 public class BasicDrive extends LinearOpMode {
     Hardware hulk = new Hardware();
     //Creates hulk object
+    TFObjectDetector tfod;
+    static final String LABEL_GOLD_MINERAL = "Gold Mineral";
      AutonomousTools t = new AutonomousTools();
-    //Declares gyro
 
+    //Declares gyro
+    //public static void main(String args[])
+    //arjun is such a fucking hoe, he loves it. arjun is such a fucking hoe,
+    // he loves it.;
 
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
@@ -44,9 +54,45 @@ public class BasicDrive extends LinearOpMode {
              * [3] If there is movement in 2 dimensions
              * [4] No movement
              */
-
-            boolean xMove = gamepad1.left_stick_x > 0.1 || gamepad1.left_stick_x < -0.1;
-            boolean yMove = gamepad1.left_stick_y > 0.1 || gamepad1.left_stick_y < -0.1;
+            int pos;
+            if (tfod != null) {
+                // getUpdatedRecognitions() will return null if no new information is available since
+                // the last time that call was made.
+                List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                if (updatedRecognitions != null) {
+                    telemetry.addData("# Object Detected", updatedRecognitions.size());
+                    if (updatedRecognitions.size() == 3) {
+                        int goldMineralX = -1;
+                        int silverMineral1X = -1;
+                        int silverMineral2X = -1;
+                        for (Recognition recognition : updatedRecognitions) {
+                            if (recognition.getLabel().equals(LABEL_GOLD_MINERAL)) {
+                                goldMineralX = (int) recognition.getLeft();
+                            } else if (silverMineral1X == -1) {
+                                silverMineral1X = (int) recognition.getLeft();
+                            } else {
+                                silverMineral2X = (int) recognition.getLeft();
+                            }
+                        }
+                        if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
+                            if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
+                                telemetry.addData("Gold Mineral Position", "Left");
+                                pos = 0;
+                            } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
+                                telemetry.addData("Gold Mineral Position", "Right");
+                                pos = 2;
+                            } else {
+                                telemetry.addData("Gold Mineral Position", "Center");
+                                pos = 1;
+                            }
+                        }
+                    }
+                    telemetry.update();
+                }
+            }
+        }
+            // boolean xMove = gamepad1.left_stick_x > 0.1 || gamepad1.left_stick_x < -0.1;
+            // boolean yMove = gamepad1.left_stick_y > 0.1 || gamepad1.left_stick_y < -0.1;
 
 
             //double gamepadXABS = (xMove ? Math.abs(gamepad1.left_stick_x) : 0);
@@ -268,4 +314,3 @@ public class BasicDrive extends LinearOpMode {
             // Stops phone from queuing too many commands and breaking
         }
     }
-}

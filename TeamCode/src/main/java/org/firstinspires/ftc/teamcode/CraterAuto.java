@@ -16,13 +16,19 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 public class CraterAuto extends LinearOpMode {
     Hardware hulk = new Hardware();
     VuforiaLocalizer vuforia;
+    TFObjectDetector tfod;
     AutonomousTools t = new AutonomousTools();
+
     final double MAX_WHEEL_VELOCITY = 0.77203;
     int faceDegree = -135;
 
 
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
+        t.initVuforia(vuforia);
+        t.initTfod(tfod,hardwareMap,vuforia);
+        AutonomousTools t = new AutonomousTools();
+
 
         final double P = 0.5;
 
