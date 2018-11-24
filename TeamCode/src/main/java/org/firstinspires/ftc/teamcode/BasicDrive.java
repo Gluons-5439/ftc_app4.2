@@ -14,14 +14,14 @@ import java.util.List;
 public class BasicDrive extends LinearOpMode {
     Hardware hulk = new Hardware();
     //Creates hulk object
+    //public static void main(String dierker[])
     TFObjectDetector tfod;
     static final String LABEL_GOLD_MINERAL = "Gold Mineral";
      AutonomousTools t = new AutonomousTools();
 
     //Declares gyro
     //public static void main(String args[])
-    //arjun is such a fucking hoe, he loves it. arjun is such a fucking hoe,
-    // he loves it.;
+
 
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
@@ -85,6 +85,7 @@ public class BasicDrive extends LinearOpMode {
                                 telemetry.addData("Gold Mineral Position", "Center");
                                 pos = 1;
                             }
+                            telemetry.addData("Value of pos: ", pos);
                         }
                     }
                     telemetry.update();
