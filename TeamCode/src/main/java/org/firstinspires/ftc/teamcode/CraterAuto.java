@@ -22,7 +22,6 @@ public class CraterAuto extends LinearOpMode {
     final double MAX_WHEEL_VELOCITY = 0.77203;
     int faceDegree = -135;
 
-
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
         t.initVuforia(vuforia);
@@ -34,34 +33,11 @@ public class CraterAuto extends LinearOpMode {
 
         waitForStart();
 
-        moveForward(1500, 0.5);
+        /*
+        t.moveForward(1500, 0.5);
+        */
+
+        t.turnTemp(1000,'r');
 
     }
-
-    public void moveForward(int moveTime, double speed) throws InterruptedException {
-        hulk.frontLeft.setPower(speed);
-        hulk.frontRight.setPower(speed);
-        hulk.backLeft.setPower(speed);
-        hulk.backRight.setPower(speed);
-        Thread.sleep(moveTime);
-    }
-
-    public void turn(int degrees, char dir) throws InterruptedException {
-        final double TURN_RADIUS = 0.26043;     //Radius of the circle whose circumference the wheels will follow when turning on its axis (in metres)
-        int time = (int) ((TURN_RADIUS * Math.abs(degrees)) / MAX_WHEEL_VELOCITY) * 1000;
-        if (dir == 'l') {
-            hulk.frontLeft.setPower(1);
-            hulk.frontRight.setPower(-1);
-            hulk.backLeft.setPower(1);
-            hulk.backRight.setPower(-1);
-        } else if (dir == 'r') {
-            hulk.frontLeft.setPower(-1);
-            hulk.frontRight.setPower(1);
-            hulk.backLeft.setPower(-1);
-            hulk.backRight.setPower(1);
-        }
-        Thread.sleep(time);
-        faceDegree += (dir == 'r' ? 1 : -1) * degrees;
-    }
-
 }
