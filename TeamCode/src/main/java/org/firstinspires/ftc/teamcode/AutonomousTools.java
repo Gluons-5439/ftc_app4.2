@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+import com.vuforia.Vuforia;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -13,7 +14,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 
+import java.util.List;
 
 public class AutonomousTools {
     Hardware hulk = new Hardware();
@@ -23,6 +26,10 @@ public class AutonomousTools {
     static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     static final String LABEL_GOLD_MINERAL = "Gold Mineral";
     static final String LABEL_SILVER_MINERAL = "Silver Mineral";
+
+    private VuforiaLocalizer vuforia;
+    private HardwareMap hardwareMap;
+    private TFObjectDetector tfod;
 
     public AutonomousTools() {
 
@@ -38,7 +45,16 @@ public class AutonomousTools {
         hulk.backRight.setPower(speed);
         Thread.sleep(moveTime);
     }
-    public void initVuforia(VuforiaLocalizer vuforia) {
+
+    public void setMotorPower(int speed) {
+        hulk.frontLeft.setPower(speed);
+        hulk.frontRight.setPower(speed);
+        hulk.backLeft.setPower(speed);
+        hulk.backRight.setPower(speed);
+    }
+
+    // Removed {VuforiaLocalizer vuforia} from initVuforia();
+    public void initVuforia() {
         /*
          * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
          */
@@ -52,7 +68,8 @@ public class AutonomousTools {
 
         // Loading trackables is not necessary for the Tensor Flow Object Detection engine.
     }
-    public void initTfod(TFObjectDetector tfod, HardwareMap hardwareMap, VuforiaLocalizer vuforia) {
+    // Removed {TFObjectDetector tfod, HardwareMap hardwareMap, VuforiaLocalizer vuforia} from initTfod()
+    public void initTfod() {
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
@@ -93,6 +110,7 @@ public class AutonomousTools {
         hulk.frontRight.setPower(0);
         hulk.backLeft.setPower(0);
         hulk.backRight.setPower(0);
+
     }
 
    /* public void changeRollerLift(boolean up) throws InterruptedException { //if up is true, it is up, so the lift needs to go down, else, it goes up
@@ -109,11 +127,13 @@ public class AutonomousTools {
     */
 
     public boolean foundGold() {
-        if (lightOn) return (hulk.mineralSensor.red() >= 200 && hulk.mineralSensor.green() >= 160 && hulk.mineralSensor.blue() <= 110);
-        return false;
-   }
 
-   public void searchGold(boolean isCrater) throws InterruptedException { //If approaching three minerals from the centre
+
+        //if (lightOn) return false;
+        return false;
+    }
+
+    public void searchGold(boolean isCrater) throws InterruptedException { //If approaching three minerals from the centre
         if (foundGold()) {
             moveForward((isCrater ? 350 : 700), 0.5);
         }
@@ -135,12 +155,14 @@ public class AutonomousTools {
         }
    }
 
+   /*
    public void dropMarker() throws InterruptedException {
         hulk.markerDrop.setPower(0.35);
         Thread.sleep(250);
         hulk.markerDrop.setPower(0);
 
    }
+   */
 
    public void pointToCrater() throws InterruptedException {         // If on same axis as crater, but just turned wrong
         turn(-135 - faceDegree, 'l');

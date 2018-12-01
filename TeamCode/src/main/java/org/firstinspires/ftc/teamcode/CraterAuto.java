@@ -10,6 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import java.util.List;
 
 @Autonomous(name = "Crater", group = "Autonomous")
 
@@ -24,9 +25,17 @@ public class CraterAuto extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
-        t.initVuforia(vuforia);
-        t.initTfod(tfod,hardwareMap,vuforia);
+        t.initVuforia();
+        t.initTfod();
         AutonomousTools t = new AutonomousTools();
+        List<Recognition> updatedRecognitions;
+
+        // Moving prototype ===== WORK IN PROGRESS =====
+        do {
+            t.setMotorPower(1);
+            updatedRecognitions = tfod.getUpdatedRecognitions();
+        }
+        while (updatedRecognitions.size() != 3);
 
 
         final double P = 0.5;
