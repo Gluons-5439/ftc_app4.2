@@ -51,20 +51,24 @@ public class DepotAuto extends LinearOpMode {
         /* Block Sense */
 
 
+        /*
         t.moveForward(1700, 0.3);
 
         //turn(45/.0,'l');  //45/9 = 90
         t.turnTemp(1125, 'l');
         //0Thread.sleep(1000);
-        hulk.markerDrop.setPower(0.5);
+        // hulk.markerDrop.setPower(0.5);
         Thread.sleep(600);
-        hulk.markerDrop.setPower(0);
+        // hulk.markerDrop.setPower(0);
         t.moveForward(200, 0.3);
         t.moveForward(1400, 0.3);
         // turn(45/9,'l');  //45/9 = 90
         //turnTemp(225, 'r');
         t.moveForward(2750, 0.3);
         //turn(45/36.0,'r');  //45/9 = 90
+        */
+
+        t.turnTemp(1000,'l');
 
 
         /*t.searchGold(false);

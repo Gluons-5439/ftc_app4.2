@@ -5,8 +5,10 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 
 import java.util.List;
 
@@ -14,8 +16,8 @@ import java.util.List;
 public class BasicDrive extends LinearOpMode {
     Hardware hulk = new Hardware();
     //Creates hulk object
-    //public static void main(String dierker[])
-    TFObjectDetector tfod;
+    // VuforiaLocalizer vuforia;
+    // TFObjectDetector tfod;
     static final String LABEL_GOLD_MINERAL = "Gold Mineral";
      AutonomousTools t = new AutonomousTools();
 
@@ -26,6 +28,8 @@ public class BasicDrive extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
         boolean isSlow = false;
+        t.initVuforia();
+        t.initTfod(hardwareMap);
         boolean liftUp = false;
         //Upon initialization maps hulk hardware
         //Turns off the color sensor LED to save battery.
@@ -54,41 +58,36 @@ public class BasicDrive extends LinearOpMode {
              * [3] If there is movement in 2 dimensions
              * [4] No movement
              */
-            int pos;
-            if (tfod != null) {
+            if (t.tfod != null) {
                 // getUpdatedRecognitions() will return null if no new information is available since
                 // the last time that call was made.
-                List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                List<Recognition> updatedRecognitions = t.tfod.getUpdatedRecognitions();
                 if (updatedRecognitions != null) {
-                    telemetry.addData("# Object Detected", updatedRecognitions.size());
+                    telemetry.addData("# Objects Detected", updatedRecognitions.size());
                     if (updatedRecognitions.size() == 3) {
                         int goldMineralX = -1;
                         int silverMineral1X = -1;
                         int silverMineral2X = -1;
                         for (Recognition recognition : updatedRecognitions) {
                             if (recognition.getLabel().equals(LABEL_GOLD_MINERAL)) {
-                                goldMineralX = (int) recognition.getLeft();
+                                goldMineralX = (int) recognition.getBottom();
                             } else if (silverMineral1X == -1) {
-                                silverMineral1X = (int) recognition.getLeft();
+                                silverMineral1X = (int) recognition.getBottom();
                             } else {
-                                silverMineral2X = (int) recognition.getLeft();
+                                silverMineral2X = (int) recognition.getBottom();
                             }
                         }
                         if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
                             if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
                                 telemetry.addData("Gold Mineral Position", "Left");
-                                pos = 0;
                             } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
                                 telemetry.addData("Gold Mineral Position", "Right");
-                                pos = 2;
                             } else {
                                 telemetry.addData("Gold Mineral Position", "Center");
-                                pos = 1;
                             }
-                            telemetry.addData("Value of pos: ", pos);
                         }
                     }
-                    telemetry.update();
+                    // telemetry.update();
                 }
             }
         }
@@ -104,12 +103,19 @@ public class BasicDrive extends LinearOpMode {
             {
                 isSlow = !isSlow;
             }
-             if(gamepad1.y)
-            {
-            hulk.yoink.setPower(1);
-            Thread.sleep(100);
-            hulk.yoink.setPower(0); // yoink
+
+
+            if(gamepad1.y) {
+                hulk.yoink.setPower(1);
+                Thread.sleep(100);
+                hulk.hangLift.setPower(-0.05);
+                hulk.hangLift2.setPower(-0.05);
+                hulk.yoink.setPower(0);
+                Thread.sleep(500);
+                hulk.hangLift.setPower(0);
+                hulk.hangLift2.setPower(0);
             }
+
             double forward = -gamepad1.left_stick_y;
             double right = gamepad1.left_stick_x;
             double leftspeed = forward - right;
@@ -120,6 +126,7 @@ public class BasicDrive extends LinearOpMode {
             hulk.frontRight.setPower(rightspeed * (isSlow ? 0.75 : 0.9));
             hulk.backRight.setPower(rightspeed * (isSlow ? 0.75 : 0.9));
 
+            /*
             if(gamepad1.x)
             {
                 hulk.hangLift.setPower(liftUp ? 0.7 : -0.7);
@@ -129,6 +136,7 @@ public class BasicDrive extends LinearOpMode {
                 hulk.hangLift2.setPower(0);
                 liftUp = !liftUp;
             }
+            */
 
 
          /*  if(!xMove && !yMove)  //Case: Not moving

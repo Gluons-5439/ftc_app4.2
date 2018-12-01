@@ -33,17 +33,17 @@ public class Hardware {
 
     private BNO055IMU imu;
 
-    DcMotor rollerLift;         //Hub 2 Motor 1
-    DcMotor hangLift;           //Hub 2 Motor 2
-    DcMotor hangLift2;          //Hub 2 Motor 3
+    DcMotor rollerLift;         //Hub 2 Motor 0
+    DcMotor hangLift;           //Hub 2 Motor 1 (top)
+    DcMotor hangLift2;          //Hub 2 Motor 2 (bottom)
     //DcMotor spin;
 
     HardwareMap hwMap;
     private ElapsedTime period = new ElapsedTime();
-    static final int tickSpeed = 1120, distanceFromCentermm = 203;
-    static final double wheelCircumferencemm = 159.5929;
+    // static final int tickSpeed = 1120, distanceFromCentermm = 203;
+    // static final double wheelCircumferencemm = 159.5929;
 
-    VuforiaTrackables vuforia;
+
         public Hardware(){
 
         }
@@ -104,7 +104,7 @@ public class Hardware {
 
             yoink.setDirection(CRServo.Direction.FORWARD);
             hangLift.setDirection(DcMotor.Direction.FORWARD);
-            hangLift2.setDirection(DcMotor.Direction.FORWARD);
+            hangLift2.setDirection(DcMotor.Direction.REVERSE);
             // spin.setDirection(DcMotor.Direction.FORWARD);
 
         }
