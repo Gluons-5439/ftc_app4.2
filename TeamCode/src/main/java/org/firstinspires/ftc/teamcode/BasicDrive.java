@@ -108,7 +108,7 @@ public class BasicDrive extends LinearOpMode {
             {
             hulk.yoink.setPower(1);
             Thread.sleep(100);
-            hulk.yoink.setPower(0);
+            hulk.yoink.setPower(0); // yoink
             }
             double forward = -gamepad1.left_stick_y;
             double right = gamepad1.left_stick_x;
