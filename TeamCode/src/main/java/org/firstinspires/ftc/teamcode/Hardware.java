@@ -22,9 +22,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 public class Hardware {
 
-    ColorSensor mineralSensor;
-    CRServo sensorDrop;
-    CRServo markerDrop;
+
+    CRServo yoink;
+
 
     DcMotor frontRight;         //Hub 3 Motor 0
     DcMotor frontLeft;          //Hub 3 Motor 1
@@ -33,9 +33,9 @@ public class Hardware {
 
     private BNO055IMU imu;
 
-   // DcMotor rollerLift;
-    DcMotor hangLift;           //Hub 2
-    DcMotor hangLift2;          //Hub 3
+    DcMotor rollerLift;         //Hub 2 Motor 1
+    DcMotor hangLift;           //Hub 2 Motor 2
+    DcMotor hangLift2;          //Hub 2 Motor 3
     //DcMotor spin;
 
     HardwareMap hwMap;
@@ -74,11 +74,12 @@ public class Hardware {
             // rollerLift = hwMap.dcMotor.get("rollerLift");
             hangLift2 = hwMap.dcMotor.get("hangLift2");
             hangLift = hwMap.dcMotor.get("hangLift");
-            markerDrop = hwMap.crservo.get("markerDrop");
-            sensorDrop = hwMap.crservo.get("sensorDrop");
+            yoink = hwMap.crservo.get("yoink");
+            rollerLift = hwMap.dcMotor.get("rollerLift");
+            // sensorDrop = hwMap.crservo.get("sensorDrop");
             // spin = hwMap.dcMotor.get("spin");
 
-            mineralSensor = hwMap.colorSensor.get("mineralSensor");
+
         }
 
         private void initMotorSettings () {
@@ -88,19 +89,20 @@ public class Hardware {
             backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             // rollerLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            hangLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            hangLift2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            hangLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            hangLift2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             // spin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
+            rollerLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             frontLeft.setDirection(DcMotor.Direction.REVERSE);
             frontRight.setDirection(DcMotor.Direction.FORWARD);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
             backRight.setDirection(DcMotor.Direction.FORWARD);
 
+            rollerLift.setDirection(DcMotor.Direction.FORWARD);
 
 
-            // rollerLift.setDirection(DcMotor.Direction.FORWARD);
+            yoink.setDirection(CRServo.Direction.FORWARD);
             hangLift.setDirection(DcMotor.Direction.FORWARD);
             hangLift2.setDirection(DcMotor.Direction.FORWARD);
             // spin.setDirection(DcMotor.Direction.FORWARD);
@@ -114,12 +116,13 @@ public class Hardware {
             backLeft.setPower(0);
             hangLift.setPower(0);
             hangLift2.setPower(0);
-            markerDrop.setPower(0);
-            sensorDrop.setPower(0);
+            yoink.setPower(0);
+            rollerLift.setPower(0);
+
 
             // rollerLift.setPower(0);
             // spin.setPower(0);
-             mineralSensor.enableLed(false);
+
         }
 
         public void waitForTick (long periodMs) throws InterruptedException {
