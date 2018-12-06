@@ -19,7 +19,7 @@ public class BasicDrive extends LinearOpMode {
     // VuforiaLocalizer vuforia;
     // TFObjectDetector tfod;
     static final String LABEL_GOLD_MINERAL = "Gold Mineral";
-     AutonomousTools t = new AutonomousTools();
+    AutonomousTools t = new AutonomousTools();
 
     //Declares gyro
     //public static void main(String args[])
@@ -33,8 +33,8 @@ public class BasicDrive extends LinearOpMode {
         boolean liftUp = false;
         //Upon initialization maps hulk hardware
         //Turns off the color sensor LED to save battery.
-      //  double pow = 1;
-       // String driveMode = "Fast Mode";
+        //  double pow = 1;
+        // String driveMode = "Fast Mode";
         //Maps and calibrates gyro heading during initialization
         //Makes sure initialization runs long enough for gyro to finish calibration
         waitForStart();
@@ -58,39 +58,7 @@ public class BasicDrive extends LinearOpMode {
              * [3] If there is movement in 2 dimensions
              * [4] No movement
              */
-            if (t.tfod != null) {
-                // getUpdatedRecognitions() will return null if no new information is available since
-                // the last time that call was made.
-                List<Recognition> updatedRecognitions = t.tfod.getUpdatedRecognitions();
-                if (updatedRecognitions != null) {
-                    telemetry.addData("# Objects Detected", updatedRecognitions.size());
-                    if (updatedRecognitions.size() == 3) {
-                        int goldMineralX = -1;
-                        int silverMineral1X = -1;
-                        int silverMineral2X = -1;
-                        for (Recognition recognition : updatedRecognitions) {
-                            if (recognition.getLabel().equals(LABEL_GOLD_MINERAL)) {
-                                goldMineralX = (int) recognition.getBottom();
-                            } else if (silverMineral1X == -1) {
-                                silverMineral1X = (int) recognition.getBottom();
-                            } else {
-                                silverMineral2X = (int) recognition.getBottom();
-                            }
-                        }
-                        if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
-                            if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
-                                telemetry.addData("Gold Mineral Position", "Left");
-                            } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
-                                telemetry.addData("Gold Mineral Position", "Right");
-                            } else {
-                                telemetry.addData("Gold Mineral Position", "Center");
-                            }
-                        }
-                    }
-                    // telemetry.update();
-                }
-            }
-        }
+
             // boolean xMove = gamepad1.left_stick_x > 0.1 || gamepad1.left_stick_x < -0.1;
             // boolean yMove = gamepad1.left_stick_y > 0.1 || gamepad1.left_stick_y < -0.1;
 
@@ -99,19 +67,18 @@ public class BasicDrive extends LinearOpMode {
             //double speed = 0.8 * (gamepad1.left_stick_y >= 0 ? 1 : -1) * Math.sqrt(Math.pow((yMove ? gamepad1.left_stick_y : 1),2) + Math.pow(gamepadXABS, 2));
 
 
-            if(gamepad1.right_trigger > 0.4)
-            {
+            if (gamepad1.right_trigger > 0.4) {
                 isSlow = !isSlow;
             }
 
 
-            if(gamepad1.y) {
+            if (gamepad1.y) {
                 hulk.yoink.setPower(1);
                 Thread.sleep(100);
-                hulk.hangLift.setPower(-0.05);
-                hulk.hangLift2.setPower(-0.05);
+                hulk.hangLift.setPower(1);
+                hulk.hangLift2.setPower(1);
                 hulk.yoink.setPower(0);
-                Thread.sleep(500);
+                Thread.sleep(3000);
                 hulk.hangLift.setPower(0);
                 hulk.hangLift2.setPower(0);
             }
@@ -220,11 +187,11 @@ public class BasicDrive extends LinearOpMode {
             }
             */
 
-          //  if (gamepad1.a) {
-             //   hulk.mineralSensor.enableLed(t.lightOn);
+            //  if (gamepad1.a) {
+            //   hulk.mineralSensor.enableLed(t.lightOn);
             //    t.lightOn = !t.lightOn;
-           //     sleep(250);
-          //  }
+            //     sleep(250);
+            //  }
 
 
             /*if(gamepad1.a) {
@@ -324,8 +291,9 @@ public class BasicDrive extends LinearOpMode {
 
             telemetry.update();
             // Adds everything to telemetry
-            
+
             hulk.waitForTick(40);
             // Stops phone from queuing too many commands and breaking
         }
     }
+}

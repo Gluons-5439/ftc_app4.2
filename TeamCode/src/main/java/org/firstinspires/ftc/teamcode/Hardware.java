@@ -104,7 +104,7 @@ public class Hardware {
 
             yoink.setDirection(CRServo.Direction.FORWARD);
             hangLift.setDirection(DcMotor.Direction.FORWARD);
-            hangLift2.setDirection(DcMotor.Direction.REVERSE);
+            hangLift2.setDirection(DcMotor.Direction.FORWARD);
             // spin.setDirection(DcMotor.Direction.FORWARD);
 
         }
