@@ -22,8 +22,6 @@ import java.util.List;
 public class AutonomousTools {
     Hardware hulk = new Hardware();
     final double MAX_WHEEL_VELOCITY = 0.77203;
-    public boolean liftPos = false;
-    public boolean lightOn = true;
     static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     static final String LABEL_GOLD_MINERAL = "Gold Mineral";
     static final String LABEL_SILVER_MINERAL = "Silver Mineral";
@@ -36,7 +34,6 @@ public class AutonomousTools {
 
     }
 
-    public boolean onCraterSide = false;
     public int faceDegree = 0;          // Degree relative to direction it faces when landing ON DEPOT SIDE (crater side is -90) left - , right +
 
     public void moveForward(int moveTime, double speed) throws InterruptedException {

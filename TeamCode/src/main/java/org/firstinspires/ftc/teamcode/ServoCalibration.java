@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.Range;
 
 public class ServoCalibration extends LinearOpMode {
     Hardware robot = new Hardware();
+
     //Creates robot object
 
     //Declares gyro

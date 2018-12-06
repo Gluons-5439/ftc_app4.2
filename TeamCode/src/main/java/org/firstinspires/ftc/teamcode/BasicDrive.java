@@ -40,6 +40,7 @@ public class BasicDrive extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+
             /* 10-MINUTE VERSION
             int left = (int)(gamepad1.left_stick_y * 10);
             hulk.backLeft.setPower(left/10);
