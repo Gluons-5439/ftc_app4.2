@@ -27,7 +27,6 @@ public class AutonomousTools {
     static final String LABEL_SILVER_MINERAL = "Silver Mineral";
 
     public VuforiaLocalizer vuforia;
-    public HardwareMap hardwareMap;
     public TFObjectDetector tfod;
 
     public AutonomousTools() {
@@ -39,15 +38,19 @@ public class AutonomousTools {
 
     public int faceDegree = 0;          // Degree relative to direction it faces when landing ON DEPOT SIDE (crater side is -90) left - , right +
 
-    public void moveForward(int moveTime, double speed) throws InterruptedException {
+    public void moveForward(int moveTime, double speed,Hardware hulk) throws InterruptedException {
         hulk.frontLeft.setPower(speed);
         hulk.frontRight.setPower(speed);
         hulk.backLeft.setPower(speed);
         hulk.backRight.setPower(speed);
         Thread.sleep(moveTime);
+        hulk.frontLeft.setPower(0);
+        hulk.frontRight.setPower(0);
+        hulk.backLeft.setPower(0);
+        hulk.backRight.setPower(0);
     }
 
-    public void setMotorPower(double power) {
+    public void setMotorPower(double power,Hardware hulk) {
         hulk.frontLeft.setPower(power);
         hulk.frontRight.setPower(power);
         hulk.backLeft.setPower(power);
@@ -85,20 +88,24 @@ public class AutonomousTools {
         tfodParameters.minimumConfidence = 0.7;
     }
 
-    public void moveBackward(int moveTime, double speed) throws InterruptedException {
+    public void moveBackward(int moveTime, double speed,Hardware hulk) throws InterruptedException {
         hulk.frontLeft.setPower(-speed);
         hulk.frontRight.setPower(-speed);
         hulk.backLeft.setPower(-speed);
         hulk.backRight.setPower(-speed);
         Thread.sleep(moveTime);
+        hulk.frontLeft.setPower(0);
+        hulk.frontRight.setPower(0);
+        hulk.backLeft.setPower(0);
+        hulk.backRight.setPower(0);
 
     }
     public void setFaceDegree(int x) {
         faceDegree = x;
     }
 
-    public void turn(int degrees, char dir) throws InterruptedException {
-        hulk.init(hardwareMap);
+    public void turn(int degrees, char dir,Hardware hulk) throws InterruptedException {
+        final double MAX_RPM = 320;
         final double TURN_RADIUS = 0.26043;     //Radius of the circle whose circumference the wheels will follow when turning on its axis (in metres)
         int time = (int)((TURN_RADIUS * Math.abs(degrees) * Math.PI / 180) / MAX_WHEEL_VELOCITY) * 1000;
         if (dir == 'l') {
@@ -143,7 +150,7 @@ public class AutonomousTools {
         return false;
     }
 
-    public void searchGold(boolean isCrater) throws InterruptedException { //If approaching three minerals from the centre
+   /* public void searchGold(boolean isCrater) throws InterruptedException { //If approaching three minerals from the centre
         if (foundGold()) {
             moveForward((isCrater ? 350 : 700), 0.5);
         }
@@ -163,7 +170,7 @@ public class AutonomousTools {
 
             }
         }
-   }
+   }*/
 
    /*
    public void dropMarker() throws InterruptedException {
@@ -174,13 +181,12 @@ public class AutonomousTools {
    }
    */
 
-   public void pointToCrater() throws InterruptedException {         // If on same axis as crater, but just turned wrong
+  /* public void pointToCrater() throws InterruptedException {         // If on same axis as crater, but just turned wrong
         turn(-135 - faceDegree, 'l');
         moveForward(3000,0.75);
-   }
+   }*/
 
-    public void turnTemp(int time, char dir) throws InterruptedException {
-        hulk.init(hardwareMap);
+    public void turnTemp(int time, char dir,Hardware hulk) throws InterruptedException {
        if (dir == 'l') {
             hulk.frontLeft.setPower(1);
             hulk.frontRight.setPower(-1);

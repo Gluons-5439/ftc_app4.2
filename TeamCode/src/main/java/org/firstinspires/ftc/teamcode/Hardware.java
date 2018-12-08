@@ -24,7 +24,6 @@ public class Hardware {
 
 
     CRServo yoink;
-
     DcMotor frontRight;         //Hub 3 Motor 0
     DcMotor frontLeft;          //Hub 3 Motor 1
     DcMotor backRight;          //Hub 3 Motor 2

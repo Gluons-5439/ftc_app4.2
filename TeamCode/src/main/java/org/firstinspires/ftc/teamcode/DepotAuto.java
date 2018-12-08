@@ -85,7 +85,7 @@ public class DepotAuto extends LinearOpMode {
 
                         else if (goldMineralY != -1 && silverMineral1Y != -1) {
                             // ... if the gold is to the right of the silver, the gold is in the center ...
-                            if (goldMineralY < silverMineral1Y) {
+                            if (goldMineralY > silverMineral1Y) {
                                 telemetry.addData("Gold Mineral Position", "Center");
                                 p = "Center";
                             }
@@ -110,41 +110,61 @@ public class DepotAuto extends LinearOpMode {
 
         // Thread.sleep(2000);     // FOR TESTING PURPOSES
         //t.moveBackward(500,.5, hulk);
-        // t.turn(90,'r', hulk);
-        t.turnTemp(700, 'r', hulk);
+        t.turnTemp(670, 'r', hulk);
         if (p.equals("Center")) {
-            t.moveForward(1500,.5, hulk);
+            t.moveForward(3400,.25, hulk);
             lowerMarker();
+            t.moveBackward(700,.25, hulk);
+            t.turnTemp(340, 'r', hulk);
+            t.moveForward(1000,.25, hulk);
+            t.turnTemp(810, 'r', hulk);
+            t.moveForward(4000,.25, hulk);
+            t.moveForward(500,.8,hulk);
 
         }
         else if (p.equals("Right")) {
-            t.moveForward(400,.5,hulk);
-            // t.turn(90,'r', hulk);
+            t.moveForward(700,.25,hulk);
             t.turnTemp(700,'r', hulk);
-            t.moveForward(700,.5,hulk);
-            t.turnTemp(817,'l', hulk);
-            t.moveForward(1500,.5,hulk);
+            t.moveForward(2000,.25,hulk);
+            t.turnTemp(900,'l', hulk);
+            t.moveForward(2500,.25,hulk);
+            t.moveBackward(700,.25, hulk);
             lowerMarker();
+            t.turnTemp(810-250, 'r', hulk);
+            t.moveForward(1000,.25, hulk);
+            t.turnTemp(810, 'r', hulk);
+            t.moveForward(4000,.25, hulk);
+            t.moveForward(500,.8,hulk);
+            
         }
-        else {
-            t.moveForward(400,.5,hulk);
-            t.turn(90,'l', hulk);
-            t.moveForward(700,.5,hulk);
-            t.turn(105,'r',hulk);
-            t.moveForward(1500,.5,hulk);
+        else { // "Left"
+            t.moveForward(700,.25,hulk);
+            t.turnTemp(700,'l', hulk);
+            t.moveForward(1500,.25,hulk);
+            t.turnTemp(900,'r', hulk);
+            t.moveForward(3000,.25,hulk);
+            t.moveBackward(700,.25, hulk);
             lowerMarker();
+            t.turnTemp(250, 'r', hulk);
+            t.moveForward(1000,.25, hulk);
+            t.turnTemp(810, 'r', hulk);
+            t.moveForward(4000,.25, hulk);
+            t.moveForward(500,.8,hulk);
         }
 
 
     }
 
     private void lowerMarker() throws InterruptedException {
-        hulk.rollerLift.setPower(.5);
-        Thread.sleep(2500);
+
+        hulk.rollerLift.setPower(-1);
+        Thread.sleep(1000);
         hulk.rollerLift.setPower(0);
         Thread.sleep(1000);
-        hulk.rollerLift.setPower(-.2);
-        Thread.sleep(3000);
+        hulk.rollerLift.setPower(1);
+        Thread.sleep(100);
+        hulk.rollerLift.setPower(.5);
+        Thread.sleep(500);
         hulk.rollerLift.setPower(0);
     }
 
