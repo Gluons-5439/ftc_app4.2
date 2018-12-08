@@ -44,11 +44,11 @@ public class AutonomousTools {
         Thread.sleep(moveTime);
     }
 
-    public void setMotorPower(int speed) {
-        hulk.frontLeft.setPower(speed);
-        hulk.frontRight.setPower(speed);
-        hulk.backLeft.setPower(speed);
-        hulk.backRight.setPower(speed);
+    public void setMotorPower(double power) {
+        hulk.frontLeft.setPower(power);
+        hulk.frontRight.setPower(power);
+        hulk.backLeft.setPower(power);
+        hulk.backRight.setPower(power);
     }
 
     public void initVuforia() {
