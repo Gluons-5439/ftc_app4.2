@@ -47,9 +47,6 @@ public class DepotAuto extends LinearOpMode {
                 List<Recognition> updatedRecognitions = t.tfod.getUpdatedRecognitions();
                 if (updatedRecognitions != null) {
                     if (updatedRecognitions.size() == 2)
-                        t.setMotorPower(0);
-                    t.setMotorPower(-0.05);
-
                     telemetry.addData("# Objects Detected", updatedRecognitions.size());
                     if (updatedRecognitions.size() == 2) {
                         foundMinerals = true;
@@ -77,7 +74,7 @@ public class DepotAuto extends LinearOpMode {
                         if (goldMineralY == -1 && silverMineral1Y != -1 && silverMineral2Y != -1) {
                             telemetry.addData("Gold Mineral Position", "Left");
                             p = "Left";
-                            ;
+
                         }
 
                         // If you can see one gold and one silver ...
@@ -101,11 +98,45 @@ public class DepotAuto extends LinearOpMode {
                 }
             }
         }
-        t.turn(90,'r');
+        t.turnTemp(90,'r');
+        t.moveForward(500,.3);
+        t.turnTemp(90,'l');
         if(p.equals("Center")) {
-
+            t.turn(90,'r');
             t.moveForward(1500,.8);
+            hulk.rollerLift.setPower(.8);
+            Thread.sleep(1000);
+            hulk.rollerLift.setPower(0);
+            hulk.rollerLift.setPower(-.1);
+            Thread.sleep(1000);
+            hulk.rollerLift.setPower(0);
+
         }
+        else if (p.equals("Right"))
+        {
+            t.moveBackward(100,.5);
+            t.turn(60,'r');
+            t.moveForward(1500,.8);
+            hulk.rollerLift.setPower(.8);
+            Thread.sleep(1000);
+            hulk.rollerLift.setPower(0);
+            hulk.rollerLift.setPower(-.1);
+            Thread.sleep(1000);
+            hulk.rollerLift.setPower(0);
+        }
+        else
+        {
+            t.moveForward(100,.5);
+            t.turnTemp(120,'r');
+            t.moveForward(1500,.8);
+            hulk.rollerLift.setPower(.8);
+            Thread.sleep(1000);
+            hulk.rollerLift.setPower(0);
+            hulk.rollerLift.setPower(-.1);
+            Thread.sleep(1000);
+            hulk.rollerLift.setPower(0);
+        }
+
 
     }
 
