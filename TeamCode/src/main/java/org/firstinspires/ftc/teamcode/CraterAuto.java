@@ -26,12 +26,16 @@ public class CraterAuto extends LinearOpMode {
 
 
     public void runOpMode() throws InterruptedException {
-        hulk.init(hardwareMap);
-        t.initVuforia();
-        t.initTfod(hardwareMap);
-        List<Recognition> updatedRecognitions;
+         hulk.init(hardwareMap);
+        // t.initVuforia();
+        // t.initTfod(hardwareMap);
+        // List<Recognition> updatedRecognitions;
+
+
+        t.turn(90,'l',hulk);
 
         // Moving prototype ===== WORK IN PROGRESS ===== (Let me work on this bit first. I might have a few ideas.)
+        /*
         do {
             // t.setMotorPower(1);
             updatedRecognitions = t.tfod.getUpdatedRecognitions();
@@ -46,6 +50,7 @@ public class CraterAuto extends LinearOpMode {
         final double P = 0.5;
 
         waitForStart();
+        */
 
         /*
         t.moveForward(1500, 0.5);
