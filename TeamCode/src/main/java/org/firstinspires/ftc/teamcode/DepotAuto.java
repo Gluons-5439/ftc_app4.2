@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.*;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
@@ -12,6 +14,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 import java.util.Objects;
+import java.lang.String;
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Depot", group = "Autonomous")
 public class DepotAuto extends LinearOpMode {
@@ -31,17 +34,10 @@ public class DepotAuto extends LinearOpMode {
         String p = "";
 
         waitForStart();
-/*
-        hulk.hangLift.setPower(1);
-        hulk.hangLift2.setPower(1);
-        hulk.yoink.setPower(0);
-        Thread.sleep(3000);
-        hulk.hangLift.setPower(0);
-        hulk.hangLift2.setPower(0);
-*/
-            if (t.tfod != null) {
-                t.tfod.activate();
-            }
+
+
+        t.tfod.activate();
+
 
         if (t.tfod != null) {
             boolean foundMinerals = false;
@@ -50,7 +46,12 @@ public class DepotAuto extends LinearOpMode {
             while (!foundMinerals) {
                 List<Recognition> updatedRecognitions = t.tfod.getUpdatedRecognitions();
                 if (updatedRecognitions != null) {
+                    /*
                     if (updatedRecognitions.size() == 2)
+                        t.setMotorPower(0);
+                    else t.setMotorPower(-0.05);
+                    */
+
                     telemetry.addData("# Objects Detected", updatedRecognitions.size());
                     if (updatedRecognitions.size() == 2) {
                         foundMinerals = true;
@@ -78,7 +79,6 @@ public class DepotAuto extends LinearOpMode {
                         if (goldMineralY == -1 && silverMineral1Y != -1 && silverMineral2Y != -1) {
                             telemetry.addData("Gold Mineral Position", "Left");
                             p = "Left";
-
                         }
 
                         // If you can see one gold and one silver ...
@@ -95,55 +95,58 @@ public class DepotAuto extends LinearOpMode {
                             else {
                                 telemetry.addData("Gold Mineral Position", "Right");
                                 p = "Right";
+                            }
                         }
                     }
-                }
-                telemetry.update();
+                    telemetry.update();
                 }
             }
         }
-        t.turnTemp(90,'r');
-        t.moveForward(500,.3);
-        t.turnTemp(90,'l');
-        if(p.equals("Center")) {
-            t.turn(90,'r');
-            t.moveForward(1500,.8);
-            hulk.rollerLift.setPower(.8);
-            Thread.sleep(250);
-            hulk.rollerLift.setPower(0);
-            hulk.rollerLift.setPower(-.2);
-            Thread.sleep(1000);
-            hulk.rollerLift.setPower(0);
+
+
+
+
+
+
+        // Thread.sleep(2000);     // FOR TESTING PURPOSES
+        //t.moveBackward(500,.5, hulk);
+        // t.turn(90,'r', hulk);
+        t.turnTemp(700, 'r', hulk);
+        if (p.equals("Center")) {
+            t.moveForward(1500,.5, hulk);
+            lowerMarker();
 
         }
-        else if (p.equals("Right"))
-        {
-            t.moveBackward(100,.5);
-            t.turn(60,'r');
-            t.moveForward(1500,.8);
-            hulk.rollerLift.setPower(.8);
-            Thread.sleep(250);
-            hulk.rollerLift.setPower(0);
-            hulk.rollerLift.setPower(-.2);
-            Thread.sleep(1000);
-            hulk.rollerLift.setPower(0);
+        else if (p.equals("Right")) {
+            t.moveForward(400,.5,hulk);
+            // t.turn(90,'r', hulk);
+            t.turnTemp(700,'r', hulk);
+            t.moveForward(700,.5,hulk);
+            t.turnTemp(817,'l', hulk);
+            t.moveForward(1500,.5,hulk);
+            lowerMarker();
         }
-        else
-        {
-            t.moveForward(100,.5);
-            t.turnTemp(120,'r');
-            t.moveForward(1500,.8);
-            hulk.rollerLift.setPower(.8);
-            Thread.sleep(250);
-            hulk.rollerLift.setPower(0);
-            hulk.rollerLift.setPower(-.2);
-            Thread.sleep(1000);
-            hulk.rollerLift.setPower(0);
+        else {
+            t.moveForward(400,.5,hulk);
+            t.turn(90,'l', hulk);
+            t.moveForward(700,.5,hulk);
+            t.turn(105,'r',hulk);
+            t.moveForward(1500,.5,hulk);
+            lowerMarker();
         }
 
 
     }
 
+    private void lowerMarker() throws InterruptedException {
+        hulk.rollerLift.setPower(.5);
+        Thread.sleep(2500);
+        hulk.rollerLift.setPower(0);
+        Thread.sleep(1000);
+        hulk.rollerLift.setPower(-.2);
+        Thread.sleep(3000);
+        hulk.rollerLift.setPower(0);
+    }
 
     /* Unhook
     copy what is in button Y **/
