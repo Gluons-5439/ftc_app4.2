@@ -27,11 +27,11 @@ public class AutonomousTools {
     static final String LABEL_SILVER_MINERAL = "Silver Mineral";
 
     public VuforiaLocalizer vuforia;
-    private HardwareMap hardwareMap;
+    public HardwareMap hardwareMap;
     public TFObjectDetector tfod;
 
     public AutonomousTools() {
-
+        hulk.init(hardwareMap);
     }
 
     public int faceDegree = 0;          // Degree relative to direction it faces when landing ON DEPOT SIDE (crater side is -90) left - , right +

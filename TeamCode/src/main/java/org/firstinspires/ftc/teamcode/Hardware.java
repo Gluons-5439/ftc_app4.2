@@ -25,7 +25,6 @@ public class Hardware {
 
     CRServo yoink;
 
-
     DcMotor frontRight;         //Hub 3 Motor 0
     DcMotor frontLeft;          //Hub 3 Motor 1
     DcMotor backRight;          //Hub 3 Motor 2
@@ -88,7 +87,7 @@ public class Hardware {
             backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-            // rollerLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
             hangLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             hangLift2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             // spin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

@@ -18,7 +18,6 @@ public class DepotAuto extends LinearOpMode {
     Hardware hulk = new Hardware();
     AutonomousTools t = new AutonomousTools();
 
-
     final double MAX_WHEEL_VELOCITY = 0.77203;
     int faceDegree = -135;
 
@@ -32,14 +31,19 @@ public class DepotAuto extends LinearOpMode {
         String p = "";
 
         waitForStart();
-
+/*
+        hulk.hangLift.setPower(1);
+        hulk.hangLift2.setPower(1);
+        hulk.yoink.setPower(0);
+        Thread.sleep(3000);
+        hulk.hangLift.setPower(0);
+        hulk.hangLift2.setPower(0);
+*/
             if (t.tfod != null) {
                 t.tfod.activate();
             }
 
         if (t.tfod != null) {
-            // getUpdatedRecognitions() will return null if no new information is available since
-            // the last time that call was made.
             boolean foundMinerals = false;
 
 
@@ -105,9 +109,9 @@ public class DepotAuto extends LinearOpMode {
             t.turn(90,'r');
             t.moveForward(1500,.8);
             hulk.rollerLift.setPower(.8);
-            Thread.sleep(1000);
+            Thread.sleep(250);
             hulk.rollerLift.setPower(0);
-            hulk.rollerLift.setPower(-.1);
+            hulk.rollerLift.setPower(-.2);
             Thread.sleep(1000);
             hulk.rollerLift.setPower(0);
 
@@ -118,9 +122,9 @@ public class DepotAuto extends LinearOpMode {
             t.turn(60,'r');
             t.moveForward(1500,.8);
             hulk.rollerLift.setPower(.8);
-            Thread.sleep(1000);
+            Thread.sleep(250);
             hulk.rollerLift.setPower(0);
-            hulk.rollerLift.setPower(-.1);
+            hulk.rollerLift.setPower(-.2);
             Thread.sleep(1000);
             hulk.rollerLift.setPower(0);
         }
@@ -130,9 +134,9 @@ public class DepotAuto extends LinearOpMode {
             t.turnTemp(120,'r');
             t.moveForward(1500,.8);
             hulk.rollerLift.setPower(.8);
-            Thread.sleep(1000);
+            Thread.sleep(250);
             hulk.rollerLift.setPower(0);
-            hulk.rollerLift.setPower(-.1);
+            hulk.rollerLift.setPower(-.2);
             Thread.sleep(1000);
             hulk.rollerLift.setPower(0);
         }
