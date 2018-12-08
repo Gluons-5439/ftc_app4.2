@@ -31,8 +31,11 @@ public class AutonomousTools {
     public TFObjectDetector tfod;
 
     public AutonomousTools() {
-        hulk.init(hardwareMap);
+
     }
+
+    //public static void main(String ars[])
+
 
     public int faceDegree = 0;          // Degree relative to direction it faces when landing ON DEPOT SIDE (crater side is -90) left - , right +
 
@@ -95,6 +98,7 @@ public class AutonomousTools {
     }
 
     public void turn(int degrees, char dir) throws InterruptedException {
+        hulk.init(hardwareMap);
         final double TURN_RADIUS = 0.26043;     //Radius of the circle whose circumference the wheels will follow when turning on its axis (in metres)
         int time = (int)((TURN_RADIUS * Math.abs(degrees) * Math.PI / 180) / MAX_WHEEL_VELOCITY) * 1000;
         if (dir == 'l') {
@@ -176,7 +180,8 @@ public class AutonomousTools {
    }
 
     public void turnTemp(int time, char dir) throws InterruptedException {
-        if (dir == 'l') {
+        hulk.init(hardwareMap);
+       if (dir == 'l') {
             hulk.frontLeft.setPower(1);
             hulk.frontRight.setPower(-1);
             hulk.backLeft.setPower(1);
