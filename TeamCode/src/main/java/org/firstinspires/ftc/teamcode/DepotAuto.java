@@ -113,11 +113,11 @@ public class DepotAuto extends LinearOpMode {
         t.turnTemp(670, 'r', hulk);
         if (p.equals("Center")) {
             t.moveForward(3400,.25, hulk);
-            lowerMarker();
             t.moveBackward(700,.25, hulk);
+            lowerMarker();
             t.turnTemp(340, 'r', hulk);
-            t.moveForward(1000,.25, hulk);
-            t.turnTemp(810, 'r', hulk);
+            t.moveForward(600,.25, hulk);
+            t.turnTemp(830, 'r', hulk);
             t.moveForward(4000,.25, hulk);
             t.moveForward(500,.8,hulk);
 
@@ -125,17 +125,17 @@ public class DepotAuto extends LinearOpMode {
         else if (p.equals("Right")) {
             t.moveForward(700,.25,hulk);
             t.turnTemp(700,'r', hulk);
-            t.moveForward(2000,.25,hulk);
+            t.moveForward(1500,.25,hulk);
             t.turnTemp(900,'l', hulk);
-            t.moveForward(2500,.25,hulk);
+            t.moveForward(3000,.25,hulk);
             t.moveBackward(700,.25, hulk);
             lowerMarker();
             t.turnTemp(810-250, 'r', hulk);
-            t.moveForward(1000,.25, hulk);
-            t.turnTemp(810, 'r', hulk);
+            t.moveForward(1450,.25, hulk);
+            t.turnTemp(850, 'r', hulk);
             t.moveForward(4000,.25, hulk);
-            t.moveForward(500,.8,hulk);
-            
+            t.moveForward(600,.8,hulk);
+
         }
         else { // "Left"
             t.moveForward(700,.25,hulk);
@@ -146,10 +146,10 @@ public class DepotAuto extends LinearOpMode {
             t.moveBackward(700,.25, hulk);
             lowerMarker();
             t.turnTemp(250, 'r', hulk);
-            t.moveForward(1000,.25, hulk);
-            t.turnTemp(810, 'r', hulk);
+            t.moveForward(1450,.25, hulk);
+            t.turnTemp(850, 'r', hulk);
             t.moveForward(4000,.25, hulk);
-            t.moveForward(500,.8,hulk);
+            t.moveForward(600,.8,hulk);
         }
 
 
