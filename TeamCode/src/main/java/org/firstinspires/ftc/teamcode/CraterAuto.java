@@ -23,20 +23,14 @@ public class CraterAuto extends LinearOpMode {
     final double MAX_WHEEL_VELOCITY = 0.77203;
     int faceDegree = -135;
 
-
-
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
         t.initVuforia();
         t.initTfod(hardwareMap);
 
-
-        final double POW = 0.5;
         String p = "";
 
-
         t.tfod.activate();
-
 
         if (t.tfod != null) {
             boolean foundMinerals = false;
@@ -101,6 +95,9 @@ public class CraterAuto extends LinearOpMode {
                 }
             }
         }
+
+        // t.land(hulk);
+
         t.turnTemp(670, 'r', hulk);
         if(p.equals("Center"))
         {

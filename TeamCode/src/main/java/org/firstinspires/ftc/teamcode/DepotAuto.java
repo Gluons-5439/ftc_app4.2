@@ -35,23 +35,14 @@ public class DepotAuto extends LinearOpMode {
 
         waitForStart();
 
-
         t.tfod.activate();
-
 
         if (t.tfod != null) {
             boolean foundMinerals = false;
 
-
             while (!foundMinerals) {
                 List<Recognition> updatedRecognitions = t.tfod.getUpdatedRecognitions();
                 if (updatedRecognitions != null) {
-                    /*
-                    if (updatedRecognitions.size() == 2)
-                        t.setMotorPower(0);
-                    else t.setMotorPower(-0.05);
-                    */
-
                     telemetry.addData("# Objects Detected", updatedRecognitions.size());
                     if (updatedRecognitions.size() == 2) {
                         foundMinerals = true;
@@ -74,7 +65,7 @@ public class DepotAuto extends LinearOpMode {
                         }
 
                         // If there is no gold (-1) and there two silvers (not -1) the gold
-                        // is not visible, and must be on the right
+                        // is not visible, and must be on the left
 
                         if (goldMineralY == -1 && silverMineral1Y != -1 && silverMineral2Y != -1) {
                             telemetry.addData("Gold Mineral Position", "Left");
@@ -88,68 +79,65 @@ public class DepotAuto extends LinearOpMode {
                             if (goldMineralY > silverMineral1Y) {
                                 telemetry.addData("Gold Mineral Position", "Center");
                                 p = "Center";
-                            }
-
-                            // ... otherwise it is on the left
-
+                            }   // ... otherwise it is on the right
                             else {
                                 telemetry.addData("Gold Mineral Position", "Right");
                                 p = "Right";
                             }
                         }
+                        telemetry.addData("Silver pos 1: ", silverMineral1Y);
+                        telemetry.addData("Silver pos 2: ", silverMineral2Y);
+                        telemetry.addData("Gold pos: ", goldMineralY);
                     }
                     telemetry.update();
                 }
             }
         }
 
+        // t.land(hulk);
 
-
-
-
-
-        // Thread.sleep(2000);     // FOR TESTING PURPOSES
+        // Thread.sleep(2000);     // FOR TESTING TENSORFLOW
         //t.moveBackward(500,.5, hulk);
-        t.turnTemp(670, 'r', hulk);
+        t.turnTemp(1340, 'r', hulk);
         if (p.equals("Center")) {
             t.moveForward(3400,.25, hulk);
             t.moveBackward(700,.25, hulk);
             lowerMarker();
-            t.turnTemp(340, 'r', hulk);
+            t.turnTemp(680, 'r', hulk);
             t.moveForward(600,.25, hulk);
-            t.turnTemp(830, 'r', hulk);
+            t.turnTemp(1660, 'r', hulk);
             t.moveForward(4000,.25, hulk);
             t.moveForward(500,.8,hulk);
 
         }
         else if (p.equals("Right")) {
             t.moveForward(700,.25,hulk);
-            t.turnTemp(700,'r', hulk);
+            t.turnTemp(1400,'r', hulk);
             t.moveForward(1500,.25,hulk);
-            t.turnTemp(900,'l', hulk);
+            t.turnTemp(1800,'l', hulk);
             t.moveForward(3000,.25,hulk);
             t.moveBackward(700,.25, hulk);
             lowerMarker();
-            t.turnTemp(810-250, 'r', hulk);
+            t.turnTemp(1120, 'r', hulk);
             t.moveForward(1450,.25, hulk);
-            t.turnTemp(850, 'r', hulk);
+            t.turnTemp(1700, 'r', hulk);
             t.moveForward(4000,.25, hulk);
             t.moveForward(600,.8,hulk);
 
         }
         else { // "Left"
             t.moveForward(700,.25,hulk);
-            t.turnTemp(700,'l', hulk);
+            t.turnTemp(1400,'l', hulk);
             t.moveForward(1500,.25,hulk);
-            t.turnTemp(900,'r', hulk);
+            t.turnTemp(1800,'r', hulk);
             t.moveForward(3000,.25,hulk);
             t.moveBackward(700,.25, hulk);
             lowerMarker();
-            t.turnTemp(250, 'r', hulk);
+            t.turnTemp(500, 'r', hulk);
             t.moveForward(1450,.25, hulk);
-            t.turnTemp(850, 'r', hulk);
+            t.turnTemp(1700, 'r', hulk);
             t.moveForward(4000,.25, hulk);
-            t.moveForward(600,.8,hulk);
+            t.moveForward(600,.8, hulk);
         }
 
 
@@ -157,10 +145,12 @@ public class DepotAuto extends LinearOpMode {
 
     private void lowerMarker() throws InterruptedException {
 
-        hulk.rollerLift.setPower(-1);
-        Thread.sleep(1000);
+        hulk.rollerLift.setPower(-.7);
+        Thread.sleep(250);
+        hulk.rollerLift.setPower(-.4);
+        Thread.sleep(750);
         hulk.rollerLift.setPower(0);
-        Thread.sleep(1000);
+        Thread.sleep(750);
         hulk.rollerLift.setPower(1);
         Thread.sleep(100);
         hulk.rollerLift.setPower(.5);

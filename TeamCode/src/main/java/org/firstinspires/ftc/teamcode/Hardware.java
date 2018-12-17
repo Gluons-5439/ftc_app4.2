@@ -23,7 +23,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 public class Hardware {
 
 
-    CRServo yoink;
+    CRServo yoink;              // Hub 3 Servo 0
+
     DcMotor frontRight;         //Hub 3 Motor 0
     DcMotor frontLeft;          //Hub 3 Motor 1
     DcMotor backRight;          //Hub 3 Motor 2
@@ -69,11 +70,12 @@ public class Hardware {
             backLeft = hwMap.dcMotor.get("backLeft");
             backRight = hwMap.dcMotor.get("backRight");
 
-            // rollerLift = hwMap.dcMotor.get("rollerLift");
             hangLift2 = hwMap.dcMotor.get("hangLift2");
             hangLift = hwMap.dcMotor.get("hangLift");
-            yoink = hwMap.crservo.get("yoink");
             rollerLift = hwMap.dcMotor.get("rollerLift");
+
+
+            yoink = hwMap.crservo.get("yoink");
             // sensorDrop = hwMap.crservo.get("sensorDrop");
             // spin = hwMap.dcMotor.get("spin");
 
@@ -97,12 +99,13 @@ public class Hardware {
             backLeft.setDirection(DcMotor.Direction.REVERSE);
             backRight.setDirection(DcMotor.Direction.FORWARD);
 
+            hangLift.setDirection(DcMotor.Direction.FORWARD);
+            hangLift2.setDirection(DcMotor.Direction.FORWARD);
             rollerLift.setDirection(DcMotor.Direction.FORWARD);
 
 
             yoink.setDirection(CRServo.Direction.FORWARD);
-            hangLift.setDirection(DcMotor.Direction.FORWARD);
-            hangLift2.setDirection(DcMotor.Direction.FORWARD);
+
             // spin.setDirection(DcMotor.Direction.FORWARD);
 
         }

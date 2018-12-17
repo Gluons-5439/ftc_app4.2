@@ -14,10 +14,9 @@ import java.util.List;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Basic Drive", group = "TeleOp")
 public class BasicDrive extends LinearOpMode {
+    final double pow = 0.5;
     Hardware hulk = new Hardware();
     //Creates hulk object
-    // VuforiaLocalizer vuforia;
-    // TFObjectDetector tfod;
     static final String LABEL_GOLD_MINERAL = "Gold Mineral";
     AutonomousTools t = new AutonomousTools();
 
@@ -28,8 +27,8 @@ public class BasicDrive extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
         boolean isSlow = false;
-        t.initVuforia();
-        t.initTfod(hardwareMap);
+        // t.initVuforia();
+        // t.initTfod(hardwareMap);
         boolean liftUp = false;
         //Upon initialization maps hulk hardware
         //Turns off the color sensor LED to save battery.
@@ -67,13 +66,31 @@ public class BasicDrive extends LinearOpMode {
             //double gamepadXABS = (xMove ? Math.abs(gamepad1.left_stick_x) : 0);
             //double speed = 0.8 * (gamepad1.left_stick_y >= 0 ? 1 : -1) * Math.sqrt(Math.pow((yMove ? gamepad1.left_stick_y : 1),2) + Math.pow(gamepadXABS, 2));
 
-
+            /*
             if (gamepad1.right_trigger > 0.4) {
                 isSlow = !isSlow;
             }
+            */
 
+            if (gamepad1.right_bumper) {            // MANUAL HANGING CONTROLS
+                hulk.hangLift.setPower(-0.1);
+                hulk.hangLift2.setPower(-0.1);
+            }
+            else if (!gamepad1.left_bumper) {
+                hulk.hangLift.setPower(0);
+                hulk.hangLift2.setPower(0);
+            }
 
-            if (gamepad1.y) {
+            if (gamepad1.left_bumper) {
+                hulk.hangLift.setPower(0.1);
+                hulk.hangLift2.setPower(0.1);
+            }
+            else if (!gamepad1.right_bumper) {
+                hulk.hangLift.setPower(0);
+                hulk.hangLift2.setPower(0);
+            }
+
+            if (gamepad1.y) {                       // DROP
                 hulk.yoink.setPower(1);
                 Thread.sleep(100);
                 hulk.hangLift.setPower(1);
@@ -84,15 +101,35 @@ public class BasicDrive extends LinearOpMode {
                 hulk.hangLift2.setPower(0);
             }
 
-            double forward = -gamepad1.left_stick_y;
-            double right = gamepad1.left_stick_x;
-            double leftspeed = forward - right;
-            double rightspeed = forward + right;
-            hulk.frontLeft.setPower(leftspeed * (isSlow ? 0.75 : 0.9));
-            hulk.backLeft.setPower(leftspeed * (isSlow ? 0.75 : 0.9));
 
-            hulk.frontRight.setPower(rightspeed * (isSlow ? 0.75 : 0.9));
-            hulk.backRight.setPower(rightspeed * (isSlow ? 0.75 : 0.9));
+
+
+
+            double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);                            // COPYPASTA FROM INTERNET
+            double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
+            double rightX = gamepad1.right_stick_x;
+            final double v1 = r * Math.cos(robotAngle) + rightX;
+            final double v2 = r * Math.sin(robotAngle) - rightX;
+            final double v3 = r * Math.sin(robotAngle) + rightX;
+            final double v4 = r * Math.cos(robotAngle) - rightX;
+
+            hulk.frontLeft.setPower(v1);
+            hulk.frontRight.setPower(v2);
+            hulk.backLeft.setPower(v3);
+            hulk.backRight.setPower(v4);
+
+            double forwards = gamepad1.left_stick_y;
+            double sideways = gamepad1.left_stick_x;
+
+
+
+
+            // double forwards = gamepad1.left_stick_y;
+            // double sideways = gamepad1.left_stick_x;
+
+            // double leftMove = -gamepad1.left_stick_y;
+            // double rightMove = gamepad1.left_stick_y;
+
 
             /*
             if(gamepad1.x)
@@ -202,6 +239,7 @@ public class BasicDrive extends LinearOpMode {
                     pow = 1;
                     driveMode = "Fast Mode";
             }
+            */
 
 
             //Creates variable theta which equals hulk heading
@@ -253,9 +291,8 @@ public class BasicDrive extends LinearOpMode {
             //Deadzone for controller 2 left stick, topLiftMotor motor
             //ADD RESTRICTIONS TO STOP DRIVER FROM DRIVING IT PAST MAX/MIN HEIGHT
 
-            double leftTrigger = Math.abs(gamepad2.left_trigger)>0.2 ? -0.65*gamepad2.left_trigger : 0;
-            double rightTrigger = Math.abs(gamepad2.right_trigger)>0.2 ? 0.65*gamepad2.right_trigger : 0;
-        */
+            // double leftTrigger = Math.abs(gamepad2.left_trigger)>0.2 ? -0.65*gamepad2.left_trigger : 0;
+            // double rightTrigger = Math.abs(gamepad2.right_trigger)>0.2 ? 0.65*gamepad2.right_trigger : 0;
             // telemetry.addData("Drive Mode: ", driveMode);
             //boolean foundGold = false;
             //foundGold = t.foundGold();
@@ -285,6 +322,8 @@ public class BasicDrive extends LinearOpMode {
             telemetry.addData("FR Power: ", hulk.frontRight.getPower());
             telemetry.addData("BL Power: ", hulk.backLeft.getPower());
             telemetry.addData("BR Power: ", hulk.backRight.getPower());
+            telemetry.addData("Right bumper", gamepad1.right_bumper);
+            telemetry.addData("Left bumper", gamepad1.left_bumper);
 
             //telemetry.addLine();
             //telemetry.addLine("SENSORS");
