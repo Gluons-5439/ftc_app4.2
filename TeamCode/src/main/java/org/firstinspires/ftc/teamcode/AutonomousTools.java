@@ -138,14 +138,9 @@ public class AutonomousTools {
    }
    */
     public void land(Hardware hulk) throws InterruptedException {
-        hulk.yoink.setPower(1);
-        Thread.sleep(500);
-        hulk.yoink.setPower(0);
-        hulk.hangLift.setPower(0.1);
-        hulk.hangLift2.setPower(0.1);
-        Thread.sleep(1500);
+        hulk.hangLift.setPower(-1);
+        Thread.sleep(2000);
         hulk.hangLift.setPower(0);
-        hulk.hangLift2.setPower(0);
     }
 
     public void turnTemp(int time, char dir, Hardware hulk) throws InterruptedException {

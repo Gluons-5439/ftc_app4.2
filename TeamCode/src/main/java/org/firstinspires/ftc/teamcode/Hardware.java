@@ -23,7 +23,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 public class Hardware {
 
 
-    CRServo yoink;              // Hub 3 Servo 0
 
     DcMotor frontRight;         //Hub 3 Motor 0
     DcMotor frontLeft;          //Hub 3 Motor 1
@@ -32,9 +31,9 @@ public class Hardware {
 
     private BNO055IMU imu;
 
-    DcMotor rollerLift;         //Hub 2 Motor 0
-    DcMotor hangLift;           //Hub 2 Motor 1 (top)
-    DcMotor hangLift2;          //Hub 2 Motor 2 (bottom)
+   // DcMotor rollerLift;         //Hub 2 Motor 0
+    DcMotor hangLift;           //Hub 2 Motor 1 (top) AND GoBilda 5202 Series Yellow
+
     //DcMotor spin;
 
     HardwareMap hwMap;
@@ -70,15 +69,8 @@ public class Hardware {
             backLeft = hwMap.dcMotor.get("backLeft");
             backRight = hwMap.dcMotor.get("backRight");
 
-            hangLift2 = hwMap.dcMotor.get("hangLift2");
             hangLift = hwMap.dcMotor.get("hangLift");
-            rollerLift = hwMap.dcMotor.get("rollerLift");
-
-
-            yoink = hwMap.crservo.get("yoink");
-            // sensorDrop = hwMap.crservo.get("sensorDrop");
-            // spin = hwMap.dcMotor.get("spin");
-
+           // rollerLift = hwMap.dcMotor.get("rollerLift");
 
         }
 
@@ -90,9 +82,7 @@ public class Hardware {
 
 
             hangLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            hangLift2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            // spin.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            rollerLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+           // rollerLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
             frontLeft.setDirection(DcMotor.Direction.REVERSE);
             frontRight.setDirection(DcMotor.Direction.FORWARD);
@@ -100,13 +90,8 @@ public class Hardware {
             backRight.setDirection(DcMotor.Direction.FORWARD);
 
             hangLift.setDirection(DcMotor.Direction.FORWARD);
-            hangLift2.setDirection(DcMotor.Direction.FORWARD);
-            rollerLift.setDirection(DcMotor.Direction.FORWARD);
+            //rollerLift.setDirection(DcMotor.Direction.FORWARD);
 
-
-            yoink.setDirection(CRServo.Direction.FORWARD);
-
-            // spin.setDirection(DcMotor.Direction.FORWARD);
 
         }
 
@@ -116,14 +101,7 @@ public class Hardware {
             backRight.setPower(0);
             backLeft.setPower(0);
             hangLift.setPower(0);
-            hangLift2.setPower(0);
-            yoink.setPower(0);
-            rollerLift.setPower(0);
-
-
-            // rollerLift.setPower(0);
-            // spin.setPower(0);
-
+            //rollerLift.setPower(0);
         }
 
         public void waitForTick (long periodMs) throws InterruptedException {

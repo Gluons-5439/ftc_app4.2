@@ -38,24 +38,27 @@ public class BasicDrive extends LinearOpMode {
             //TeleOp for 2 Regular Front, 2 Mechanum Back
             double forward = gamepad1.left_stick_y;
             double sideways = gamepad1.right_stick_x;
-            hulk.frontLeft.setPower(forward);
-            hulk.frontRight.setPower(forward);
-            hulk.backLeft.setPower(sideways);
-            hulk.backRight.setPower(-sideways);
-
+            if(forward >= 0.1 || forward <= - 0.1) {
+                hulk.frontLeft.setPower(forward);
+                hulk.frontRight.setPower(forward);
+            }
+            if(sideways >= 0.1 || sideways <= - 0.1) {
+                hulk.backLeft.setPower(sideways);
+                hulk.backRight.setPower(-sideways);
+            }
 
             // Manual Hanging Controls
-            if (gamepad1.right_bumper) {
-                hulk.hangLift.setPower(-0.1);
+            if (gamepad2.right_bumper) {
+                hulk.hangLift.setPower(-1);
             }
-            else if (!gamepad1.left_bumper) {
+            else if (!gamepad2.left_bumper) {
                 hulk.hangLift.setPower(0);
             }
 
-            if (gamepad1.left_bumper) {
-                hulk.hangLift.setPower(0.1);
+            if (gamepad2.left_bumper) {
+                hulk.hangLift.setPower(1);
             }
-            else if (!gamepad1.right_bumper) {
+            else if (!gamepad2.right_bumper) {
                 hulk.hangLift.setPower(0);
             }
 

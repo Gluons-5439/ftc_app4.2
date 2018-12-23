@@ -101,8 +101,8 @@ public class DepotAuto extends LinearOpMode {
         t.turnTemp(1340, 'r', hulk);
         if (p.equals("Center")) {
             t.moveForward(3400,.25, hulk);
-            t.moveBackward(700,.25, hulk);
-            lowerMarker();
+            t.moveForward(700,-.25, hulk);
+         //   lowerMarker();
             t.turnTemp(680, 'r', hulk);
             t.moveForward(600,.25, hulk);
             t.turnTemp(1660, 'r', hulk);
@@ -116,8 +116,8 @@ public class DepotAuto extends LinearOpMode {
             t.moveForward(1500,.25,hulk);
             t.turnTemp(1800,'l', hulk);
             t.moveForward(3000,.25,hulk);
-            t.moveBackward(700,.25, hulk);
-            lowerMarker();
+            t.moveForward(700,-.25, hulk);
+        //    lowerMarker();
             t.turnTemp(1120, 'r', hulk);
             t.moveForward(1450,.25, hulk);
             t.turnTemp(1700, 'r', hulk);
@@ -131,8 +131,8 @@ public class DepotAuto extends LinearOpMode {
             t.moveForward(1500,.25,hulk);
             t.turnTemp(1800,'r', hulk);
             t.moveForward(3000,.25,hulk);
-            t.moveBackward(700,.25, hulk);
-            lowerMarker();
+            t.moveForward(700,-.25, hulk);
+          //  lowerMarker();
             t.turnTemp(500, 'r', hulk);
             t.moveForward(1450,.25, hulk);
             t.turnTemp(1700, 'r', hulk);
@@ -143,7 +143,7 @@ public class DepotAuto extends LinearOpMode {
 
     }
 
-    private void lowerMarker() throws InterruptedException {
+   /* private void lowerMarker() throws InterruptedException {
 
         hulk.rollerLift.setPower(-.7);
         Thread.sleep(250);
@@ -156,7 +156,7 @@ public class DepotAuto extends LinearOpMode {
         hulk.rollerLift.setPower(.5);
         Thread.sleep(500);
         hulk.rollerLift.setPower(0);
-    }
+    } */
 
     /* Unhook
     copy what is in button Y **/
