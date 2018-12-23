@@ -84,18 +84,6 @@ public class AutonomousTools {
         tfodParameters.minimumConfidence = 0.6;
     }
 
-    public void moveBackward(int moveTime, double speed,Hardware hulk) throws InterruptedException {
-        hulk.frontLeft.setPower(-speed);
-        hulk.frontRight.setPower(-speed);
-        hulk.backLeft.setPower(-speed);
-        hulk.backRight.setPower(-speed);
-        Thread.sleep(moveTime);
-        hulk.frontLeft.setPower(0);
-        hulk.frontRight.setPower(0);
-        hulk.backLeft.setPower(0);
-        hulk.backRight.setPower(0);
-
-    }
     public void setFaceDegree(int x) {
         faceDegree = x;
     }
