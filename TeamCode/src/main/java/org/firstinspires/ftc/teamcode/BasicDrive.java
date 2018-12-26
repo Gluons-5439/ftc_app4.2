@@ -36,17 +36,30 @@ public class BasicDrive extends LinearOpMode {
 
 
             //TeleOp for 2 Regular Front, 2 Mechanum Back
-            double forward = gamepad1.left_stick_y;
-            double sideways = gamepad1.right_stick_x;
-            if(forward >= 0.1 || forward <= - 0.1) {
-                hulk.frontLeft.setPower(forward);
-                hulk.frontRight.setPower(forward);
+            double forward = gamepad1.left_stick_y * 0.6;
+            double sideways = gamepad1.right_stick_x * 0.6;
+            if(forward >= 0.3 || forward <= - 0.3) {
+                hulk.frontLeft.setPower((forward > 0 ? 0.6 : -0.6));
+                hulk.frontRight.setPower((forward > 0 ? 0.6 : -0.6));
+                hulk.backLeft.setPower((forward > 0 ? 0.6 : -0.6));
+                hulk.backRight.setPower((forward > 0 ? 0.6 : -0.6));
             }
-            if(sideways >= 0.1 || sideways <= - 0.1) {
-                hulk.backLeft.setPower(sideways);
-                hulk.backRight.setPower(-sideways);
+            else {
+                hulk.frontLeft.setPower(0);
+                hulk.frontRight.setPower(0);
+                hulk.backLeft.setPower(0);
+                hulk.backRight.setPower(0);
+            }
+            if(sideways >= 0.3 || sideways <= - 0.3) {
+                hulk.backLeft.setPower((sideways > 0 ? 0.6 : -0.6));
+                hulk.backRight.setPower((-sideways > 0 ? -0.6 : 0.6));
+            }
+            else if((sideways <= 0.3 && sideways >= - 0.3) && forwa) {
+                hulk.backLeft.setPower(0);
+                hulk.backRight.setPower(0);
             }
 
+            /*
             // Manual Hanging Controls
             if (gamepad2.right_bumper) {
                 hulk.hangLift.setPower(-1);
@@ -61,6 +74,7 @@ public class BasicDrive extends LinearOpMode {
             else if (!gamepad2.right_bumper) {
                 hulk.hangLift.setPower(0);
             }
+            */
 
 
             // double forwards = gamepad1.left_stick_y;
@@ -224,7 +238,7 @@ public class BasicDrive extends LinearOpMode {
             //telemetry.addLine();
 
             telemetry.addLine("ACCESSORIES");
-             telemetry.addData("LIFT Power: ", hulk.hangLift.getPower());
+             // telemetry.addData("LIFT Power: ", hulk.hangLift.getPower());
 
             telemetry.addLine();
             telemetry.addLine();
@@ -240,6 +254,7 @@ public class BasicDrive extends LinearOpMode {
             telemetry.addData("BR Power: ", hulk.backRight.getPower());
             telemetry.addData("Right bumper", gamepad1.right_bumper);
             telemetry.addData("Left bumper", gamepad1.left_bumper);
+            telemetry.addData("Right stick power: ", gamepad1.right_stick_x);
 
             telemetry.update();
             // Adds everything to telemetry

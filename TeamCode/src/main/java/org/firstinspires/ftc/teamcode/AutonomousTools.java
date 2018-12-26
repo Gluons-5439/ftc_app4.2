@@ -137,11 +137,13 @@ public class AutonomousTools {
         moveForward(3000,0.75);
    }
    */
-    public void land(Hardware hulk) throws InterruptedException {
+   /*
+   public void land(Hardware hulk) throws InterruptedException {
         hulk.hangLift.setPower(-1);
         Thread.sleep(2000);
         hulk.hangLift.setPower(0);
     }
+    */
 
     public void turnTemp(int time, char dir, Hardware hulk) throws InterruptedException {
        if (dir == 'l') {
