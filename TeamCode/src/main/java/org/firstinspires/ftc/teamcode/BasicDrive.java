@@ -35,6 +35,7 @@ public class BasicDrive extends LinearOpMode {
         while (opModeIsActive()) {
 
 
+            /*
             //TeleOp for 2 Regular Front, 2 Mechanum Back
             double forward = gamepad1.left_stick_y * 0.6;
             double sideways = gamepad1.right_stick_x * 0.6;
@@ -58,6 +59,7 @@ public class BasicDrive extends LinearOpMode {
                 hulk.backLeft.setPower(0);
                 hulk.backRight.setPower(0);
             }
+            */
 
             /*
             // Manual Hanging Controls
@@ -162,7 +164,7 @@ public class BasicDrive extends LinearOpMode {
 
             //CONTROL ---------------------------------------------------------------------------------------------
             /*
-            if (gamepad1.left_trigger > 0.1)            //Hold down left trigger to spin outwards (?)
+            if (gamepad1.left_`er > 0.1)            //Hold down left trigger to spin outwards (?)
                 hulk.spin.setPower(-1);
             if (gamepad1.right_trigger > 0.1) {         //Used for spinning. Hold down right trigger to spin inwards
                 hulk.spin.setPower(1);     //Power level subject to change if need be
@@ -195,22 +197,39 @@ public class BasicDrive extends LinearOpMode {
             */
 
 
-            //Creates variable theta which equals hulk heading
 
-            //Failsafe for angle based drive: switch forward and right
-
-            //Variables to set values based on controller input, 0.1 is deadzone
-
+            double forward = Math.abs(gamepad1.left_stick_y) > 0.1 ? gamepad1.left_stick_y * pow : 0;
+            double clockwise = Math.abs(gamepad1.left_stick_x) > 0.1 ? -gamepad1.left_stick_x * pow : 0;
+            double right = Math.abs(gamepad1.right_stick_x) > 0.1 ? -gamepad1.right_stick_x : 0;
             //double temp = forward*Math.cos(Math.toRadians(theta)) - right*Math.sin(Math.toRadians(theta));
             //right = forward*Math.sin(theta) + right*Math.cos((theta));
             //forward = temp;
             //Math for drive relative to theta
-
-
+            clockwise *= -0.5;
             //Sets speed when rotating, still needs work
-
-
+            double fr = forward - clockwise - right;
+            double br = forward - clockwise + right;
+            double fl = forward + clockwise + right;
+            double bl = forward + clockwise - right;
+            double max = Math.abs(fl);
+            if (Math.abs(fr) > max)
+                max = Math.abs(fr);
+            if (Math.abs(bl) > max)
+                max = Math.abs(bl);
+            if (Math.abs(br) > max)
+                max = Math.abs(br);
+            if (max > 1) {
+                fl /= max;
+                fr /= max;
+                bl /= max;
+                br /= max;
+            }
+            hulk.frontLeft.setPower(Range.clip(fl,-1,1));
+            hulk.backLeft.setPower(Range.clip(bl,-1,1));
+            hulk.frontRight.setPower(Range.clip(fr,-1,1));
+            hulk.backRight.setPower(Range.clip(br,-1,1));
             //Three linear variables intersecting non-linearly for mecanum drive
+
 
 
 
