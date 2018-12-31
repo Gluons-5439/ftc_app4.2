@@ -14,7 +14,7 @@ import java.util.List;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Basic Drive", group = "TeleOp")
 public class BasicDrive extends LinearOpMode {
-    final double pow = 0.5;
+    final double pow = 1;
     Hardware hulk = new Hardware();
     //Creates hulk object
     static final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -33,6 +33,39 @@ public class BasicDrive extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
+
+
+
+            double forward = Math.abs(gamepad1.left_stick_y) > 0.1 ? gamepad1.left_stick_y * pow : 0;
+            double clockwise = Math.abs(gamepad1.left_stick_x) > 0.1 ? -gamepad1.left_stick_x * pow : 0;
+            double right = Math.abs(gamepad1.right_stick_x) > 0.1 ? gamepad1.right_stick_x : 0;
+            //Math for drive relative to theta
+            clockwise *= -0.5;
+            //Sets speed when rotating, still needs work
+            double fr = forward + clockwise - right;
+            double br = forward + clockwise + right;
+            double fl = forward - clockwise + right;
+            double bl = forward - clockwise - right;
+            double max = Math.abs(fl);
+            if (Math.abs(fr) > max)
+                max = Math.abs(fr);
+            if (Math.abs(bl) > max)
+                max = Math.abs(bl);
+            if (Math.abs(br) > max)
+                max = Math.abs(br);
+            if (max > 1) {
+                fl /= max;
+                fr /= max;
+                bl /= max;
+                br /= max;
+            }
+            hulk.frontLeft.setPower(Range.clip(fl,-1,1));
+            hulk.backLeft.setPower(Range.clip(bl,-1,1));
+            hulk.frontRight.setPower(Range.clip(fr,-1,1));
+            hulk.backRight.setPower(Range.clip(br,-1,1));
+
+
+
 
 
             /*
@@ -198,36 +231,7 @@ public class BasicDrive extends LinearOpMode {
 
 
 
-            double forward = Math.abs(gamepad1.left_stick_y) > 0.1 ? gamepad1.left_stick_y * pow : 0;
-            double clockwise = Math.abs(gamepad1.left_stick_x) > 0.1 ? -gamepad1.left_stick_x * pow : 0;
-            double right = Math.abs(gamepad1.right_stick_x) > 0.1 ? -gamepad1.right_stick_x : 0;
-            //double temp = forward*Math.cos(Math.toRadians(theta)) - right*Math.sin(Math.toRadians(theta));
-            //right = forward*Math.sin(theta) + right*Math.cos((theta));
-            //forward = temp;
-            //Math for drive relative to theta
-            clockwise *= -0.5;
-            //Sets speed when rotating, still needs work
-            double fr = forward - clockwise - right;
-            double br = forward - clockwise + right;
-            double fl = forward + clockwise + right;
-            double bl = forward + clockwise - right;
-            double max = Math.abs(fl);
-            if (Math.abs(fr) > max)
-                max = Math.abs(fr);
-            if (Math.abs(bl) > max)
-                max = Math.abs(bl);
-            if (Math.abs(br) > max)
-                max = Math.abs(br);
-            if (max > 1) {
-                fl /= max;
-                fr /= max;
-                bl /= max;
-                br /= max;
-            }
-            hulk.frontLeft.setPower(Range.clip(fl,-1,1));
-            hulk.backLeft.setPower(Range.clip(bl,-1,1));
-            hulk.frontRight.setPower(Range.clip(fr,-1,1));
-            hulk.backRight.setPower(Range.clip(br,-1,1));
+
             //Three linear variables intersecting non-linearly for mecanum drive
 
 
@@ -241,7 +245,7 @@ public class BasicDrive extends LinearOpMode {
           //  double padTwoRightY = Math.abs(gamepad2.right_stick_y)>0.2 ? gamepad2.right_stick_y : 0;
             //Deadzone for controller 2 right stick, lift motor
             //ADD RESTRICTIONS TO STOP DRIVER FROM DRIVING IT PAST MAX/MIN HEIGHT
-            
+
 
            // double padTwoLeftY = Math.abs(gamepad2.left_stick_y)>0.2 ? -0.5*gamepad2.left_stick_y : 0;
             //Deadzone for controller 2 left stick, topLiftMotor motor
