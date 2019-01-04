@@ -32,7 +32,7 @@ public class Hardware {
     private BNO055IMU imu;
 
     // DcMotor rollerLift;         //Hub 2 Motor 0
-    // DcMotor hangLift;           //Hub 2 Motor 1 (top) AND GoBilda 5202 Series Yellow
+     DcMotor hangLift;           //Hub 2 Motor 1 (top) AND GoBilda 5202 Series Yellow
 
     //DcMotor spin;
 
@@ -69,7 +69,7 @@ public class Hardware {
             backLeft = hwMap.dcMotor.get("backLeft");
             backRight = hwMap.dcMotor.get("backRight");
 
-            // hangLift = hwMap.dcMotor.get("hangLift");
+             hangLift = hwMap.dcMotor.get("hangLift");
             // rollerLift = hwMap.dcMotor.get("rollerLift");
 
         }
@@ -89,7 +89,7 @@ public class Hardware {
             backRight.setDirection(DcMotor.Direction.FORWARD);
             backLeft.setDirection(DcMotor.Direction.REVERSE);
 
-            // hangLift.setDirection(DcMotor.Direction.FORWARD);
+             hangLift.setDirection(DcMotor.Direction.FORWARD);
             //rollerLift.setDirection(DcMotor.Direction.FORWARD);
 
 
@@ -100,7 +100,7 @@ public class Hardware {
             frontRight.setPower(0);
             backRight.setPower(0);
             backLeft.setPower(0);
-            // hangLift.setPower(0);
+             hangLift.setPower(0);
             // rollerLift.setPower(0);
         }
 
