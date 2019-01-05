@@ -33,10 +33,10 @@ public class BasicDrive extends LinearOpMode {
             //Math for drive relative to theta
             clockwise *= -0.5;
             //Sets speed when rotating, still needs work
-            double fr = forward + clockwise - right;
-            double br = forward + clockwise + right;
-            double fl = forward - clockwise + right;
-            double bl = forward - clockwise - right;
+            double fr = forward + clockwise + right;
+            double br = forward + clockwise - right;
+            double fl = forward - clockwise - right;
+            double bl = forward - clockwise + right;
             double max = Math.abs(fl);
             if (Math.abs(fr) > max)
                 max = Math.abs(fr);

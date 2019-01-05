@@ -38,14 +38,14 @@ public class AutonomousTools {
 
     public int faceDegree = 0;          // Degree relative to direction it faces when landing ON DEPOT SIDE (crater side is -90) left - , right +
 
-    private static void setMotorPower(double speed, int fl, int fr, int bl, int br, Hardware hulk) {
+    private void setMotorPower(double speed, int fl, int fr, int bl, int br, Hardware hulk) {
         hulk.frontLeft.setPower(speed * fl);
         hulk.frontRight.setPower(speed * fr);
         hulk.backLeft.setPower(speed * bl);
         hulk.backRight.setPower(speed * br);
     }
 
-    private static void setMotorPower(Hardware hulk) {
+    private void setMotorPower(Hardware hulk) {
         hulk.frontLeft.setPower(0);
         hulk.frontRight.setPower(0);
         hulk.backLeft.setPower(0);
