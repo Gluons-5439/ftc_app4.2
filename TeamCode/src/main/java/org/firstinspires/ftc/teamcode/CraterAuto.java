@@ -96,51 +96,24 @@ public class CraterAuto extends LinearOpMode {
             }
         }
 
-        // t.land(hulk);
-
-        t.turnTemp(670, 'r', hulk);
+        t.strafe(670, 'l', hulk);
         if(p.equals("Center"))
         {
             t.moveForward(3000,.8, hulk);
         }
         else if(p.equals("Right"))
         {
-            t.turnTemp(400,'r',hulk);
+            t.turn(400,'r',hulk);
             t.moveForward(2000,.25, hulk);
-            t.turnTemp(800,'l',hulk);
+            t.turn(800,'l',hulk);
             t.moveForward(2000,.8, hulk);
         }
         else
         {
-            t.turnTemp(400,'l',hulk);
+            t.turn(400,'l',hulk);
             t.moveForward(2000,.25, hulk);
-            t.turnTemp(800,'r',hulk);
+            t.turn(800,'r',hulk);
             t.moveForward(2000,.8, hulk);
         }
-
-        // Moving prototype ===== WORK IN PROGRESS ===== (Let me work on this bit first. I might have a few ideas.)
-        /*
-        do {
-            // t.setMotorPower(1);
-            updatedRecognitions = t.tfod.getUpdatedRecognitions();
-            telemetry.addData("Number of objects: ", updatedRecognitions.size());
-            telemetry.update();
-        }
-        while (updatedRecognitions.size() != 3);
-        telemetry.addData("Number of objects: ", updatedRecognitions.size());
-        telemetry.update();
-
-
-        final double P = 0.5;
-
-        waitForStart();
-        */
-
-        /*
-        t.moveForward(1500, 0.5);
-        */
-
-        // t.turnTemp(1000,'r');
-
     }
 }

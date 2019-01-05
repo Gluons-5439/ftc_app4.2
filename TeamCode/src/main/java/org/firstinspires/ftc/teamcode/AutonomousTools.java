@@ -38,54 +38,46 @@ public class AutonomousTools {
 
     public int faceDegree = 0;          // Degree relative to direction it faces when landing ON DEPOT SIDE (crater side is -90) left - , right +
 
-    public void moveForward(int moveTime, double speed, Hardware hulk) throws InterruptedException {
-        hulk.frontLeft.setPower(speed);
-        hulk.frontRight.setPower(speed);
-        hulk.backLeft.setPower(speed);
-        hulk.backRight.setPower(speed);
-        Thread.sleep(moveTime);
+    private static void setMotorPower(double speed, int fl, int fr, int bl, int br, Hardware hulk) {
+        hulk.frontLeft.setPower(speed * fl);
+        hulk.frontRight.setPower(speed * fr);
+        hulk.backLeft.setPower(speed * bl);
+        hulk.backRight.setPower(speed * br);
+    }
+
+    private static void setMotorPower(Hardware hulk) {
         hulk.frontLeft.setPower(0);
         hulk.frontRight.setPower(0);
         hulk.backLeft.setPower(0);
         hulk.backRight.setPower(0);
     }
+
+    public void moveForward(int moveTime, double speed, Hardware hulk) throws InterruptedException {
+        setMotorPower(speed, 1, 1, 1, 1, hulk);
+        Thread.sleep(moveTime);
+        setMotorPower(hulk);
+    }
+
     public void turn(int time, char dir, Hardware hulk) throws InterruptedException {
         if (dir == 'r') {
-            hulk.frontLeft.setPower(0.7);
-            hulk.frontRight.setPower(-0.7);
-            hulk.backLeft.setPower(0.7);
-            hulk.backRight.setPower(-0.7);
+            setMotorPower(0.7, 1, -1, 1, -1, hulk);
         }
-        else if (dir == 'l'){
-            hulk.frontLeft.setPower(-0.7);
-            hulk.frontRight.setPower(0.7);
-            hulk.backLeft.setPower(-0.7);
-            hulk.backRight.setPower(0.7);
+        else if (dir == 'l') {
+            setMotorPower(0.7, -1, 1, -1, 1, hulk);
         }
         Thread.sleep(time);
-        hulk.frontLeft.setPower(0);
-        hulk.frontRight.setPower(0);
-        hulk.backLeft.setPower(0);
-        hulk.backRight.setPower(0);
+        setMotorPower(hulk);
     }
+
     public void strafe(int time, char dir, Hardware hulk) throws InterruptedException {
         if (dir == 'r') {
-            hulk.frontLeft.setPower(0.7);
-            hulk.frontRight.setPower(-0.7);
-            hulk.backLeft.setPower(-0.7);
-            hulk.backRight.setPower(0.7);
+            setMotorPower(0.7, 1, -1, -1, 1, hulk);
         }
         else if (dir == 'l'){
-            hulk.frontLeft.setPower(-0.7);
-            hulk.frontRight.setPower(0.7);
-            hulk.backLeft.setPower(0.7);
-            hulk.backRight.setPower(-0.7);
+            setMotorPower(0.7, -1, 1, 1, -1, hulk);
         }
         Thread.sleep(time);
-        hulk.frontLeft.setPower(0);
-        hulk.frontRight.setPower(0);
-        hulk.backLeft.setPower(0);
-        hulk.backRight.setPower(0);
+        setMotorPower(hulk);
     }
 
     public void land(Hardware hulk) throws InterruptedException {

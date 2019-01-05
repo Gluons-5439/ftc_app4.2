@@ -10,8 +10,6 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
 
-import java.util.List;
-
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Basic Drive", group = "TeleOp")
 public class BasicDrive extends LinearOpMode {
     final double pow = 1;
@@ -22,7 +20,6 @@ public class BasicDrive extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
-        boolean isSlow = false;
 
         waitForStart();
 
@@ -58,73 +55,15 @@ public class BasicDrive extends LinearOpMode {
             hulk.frontRight.setPower(Range.clip(fr,-1,1));
             hulk.backRight.setPower(Range.clip(br,-1,1));
 
+            // MOVEMENT TESTS FOR AUTONOMOUS
+            if (gamepad1.x)
+                t.moveForward(1000,0.7,hulk);
+            if (gamepad1.a)
+                t.turn(1000,'l',hulk);
+            if (gamepad1.b)
+                t.strafe(1000,'l',hulk);
 
-
-
-
-            /*
-            //TeleOp for 2 Regular Front, 2 Mechanum Back
-            double forward = gamepad1.left_stick_y * 0.6;
-            double sideways = gamepad1.right_stick_x * 0.6;
-            if(forward >= 0.3 || forward <= - 0.3) {
-                hulk.frontLeft.setPower((forward > 0 ? 0.6 : -0.6));
-                hulk.frontRight.setPower((forward > 0 ? 0.6 : -0.6));
-                hulk.backLeft.setPower((forward > 0 ? 0.6 : -0.6));
-                hulk.backRight.setPower((forward > 0 ? 0.6 : -0.6));
-            }
-            else {
-                hulk.frontLeft.setPower(0);
-                hulk.frontRight.setPower(0);
-                hulk.backLeft.setPower(0);
-                hulk.backRight.setPower(0);
-            }
-            if(sideways >= 0.3 || sideways <= - 0.3) {
-                hulk.backLeft.setPower((sideways > 0 ? 0.6 : -0.6));
-                hulk.backRight.setPower((-sideways > 0 ? -0.6 : 0.6));
-            }
-            else if((sideways <= 0.3 && sideways >= - 0.3) && forwa) {
-                hulk.backLeft.setPower(0);
-                hulk.backRight.setPower(0);
-            }
-            */
-
-            /*
-            // Manual Hanging Controls
-            if (gamepad2.right_bumper) {
-                hulk.hangLift.setPower(-1);
-            }
-            else if (!gamepad2.left_bumper) {
-                hulk.hangLift.setPower(0);
-            }
-
-            if (gamepad2.left_bumper) {
-                hulk.hangLift.setPower(1);
-            }
-            else if (!gamepad2.right_bumper) {
-                hulk.hangLift.setPower(0);
-            }
-            */
-
-
-            // double forwards = gamepad1.left_stick_y;
-            // double sideways = gamepad1.left_stick_x;
-
-            // double leftMove = -gamepad1.left_stick_y;
-            // double rightMove = gamepad1.left_stick_y;
-
-
-            /*
-            if(gamepad1.x)
-            {
-                hulk.hangLift.setPower(liftUp ? 0.7 : -0.7);
-                hulk.hangLift2.setPower(liftUp ? 0.7 : -0.7);
-                Thread.sleep(1000);
-                hulk.hangLift.setPower(0);
-                hulk.hangLift2.setPower(0);
-                liftUp = !liftUp;
-            }
-            */
-
+            // TELEMETRY
 
             telemetry.addLine("SERVOS");
             telemetry.addLine();

@@ -98,96 +98,48 @@ public class DepotAuto extends LinearOpMode {
 
         // Thread.sleep(2000);     // FOR TESTING TENSORFLOW
         //t.moveBackward(500,.5, hulk);
-        t.turnTemp(1340, 'r', hulk);
+        t.turn(1340, 'r', hulk);
         if (p.equals("Center")) {
             t.moveForward(3400,.25, hulk);
             t.moveForward(700,-.25, hulk);
          //   lowerMarker();
-            t.turnTemp(680, 'r', hulk);
+            t.turn(680, 'r', hulk);
             t.moveForward(600,.25, hulk);
-            t.turnTemp(1660, 'r', hulk);
+            t.turn(1660, 'r', hulk);
             t.moveForward(4000,.25, hulk);
             t.moveForward(500,.8,hulk);
 
         }
         else if (p.equals("Right")) {
             t.moveForward(700,.25,hulk);
-            t.turnTemp(1400,'r', hulk);
+            t.turn(1400,'r', hulk);
             t.moveForward(1500,.25,hulk);
-            t.turnTemp(1800,'l', hulk);
+            t.turn(1800,'l', hulk);
             t.moveForward(3000,.25,hulk);
             t.moveForward(700,-.25, hulk);
         //    lowerMarker();
-            t.turnTemp(1120, 'r', hulk);
+            t.turn(1120, 'r', hulk);
             t.moveForward(1450,.25, hulk);
-            t.turnTemp(1700, 'r', hulk);
+            t.turn(1700, 'r', hulk);
             t.moveForward(4000,.25, hulk);
             t.moveForward(600,.8,hulk);
 
         }
         else { // "Left"
             t.moveForward(700,.25,hulk);
-            t.turnTemp(1400,'l', hulk);
+            t.turn(1400,'l', hulk);
             t.moveForward(1500,.25,hulk);
-            t.turnTemp(1800,'r', hulk);
+            t.turn(1800,'r', hulk);
             t.moveForward(3000,.25,hulk);
             t.moveForward(700,-.25, hulk);
           //  lowerMarker();
-            t.turnTemp(500, 'r', hulk);
+            t.turn(500, 'r', hulk);
             t.moveForward(1450,.25, hulk);
-            t.turnTemp(1700, 'r', hulk);
+            t.turn(1700, 'r', hulk);
             t.moveForward(4000,.25, hulk);
             t.moveForward(600,.8, hulk);
         }
-
-
     }
-
-   /* private void lowerMarker() throws InterruptedException {
-
-        hulk.rollerLift.setPower(-.7);
-        Thread.sleep(250);
-        hulk.rollerLift.setPower(-.4);
-        Thread.sleep(750);
-        hulk.rollerLift.setPower(0);
-        Thread.sleep(750);
-        hulk.rollerLift.setPower(1);
-        Thread.sleep(100);
-        hulk.rollerLift.setPower(.5);
-        Thread.sleep(500);
-        hulk.rollerLift.setPower(0);
-    } */
-
-    /* Unhook
-    copy what is in button Y **/
-
-
-    /*
-    t.moveForward(1700, 0.3);
-
-    //turn(45/.0,'l');  //45/9 = 90
-    t.turnTemp(1125, 'l');
-    //0Thread.sleep(1000);
-    // hulk.markerDrop.setPower(0.5);
-    Thread.sleep(600);
-    // hulk.markerDrop.setPower(0);
-    t.moveForward(200, 0.3);
-    t.moveForward(1400, 0.3);
-    // turn(45/9,'l');  //45/9 = 90
-    //turnTemp(225, 'r');
-    t.moveForward(2750, 0.3);
-    //turn(45/36.0,'r');  //45/9 = 90
-    */
-
-
-
-    /*t.searchGold(false);
-    hulk.mineralSensor.enableLed(false);
-
-    t.moveForward(200, 0.2);
-    t.dropMarker();
-    t.moveForward(3000, 0.6);
-    */
 }
 
 
