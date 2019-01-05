@@ -66,7 +66,7 @@ public class AutonomousTools {
     public void turn(int degree, char dir, Hardware hulk) throws InterruptedException {
         /*
         HOW TO USE:
-        Enter degree
+        Enter degree, direction, and type "hulk"
          */
         if (dir == 'r') {
             setMotorPower(0.7, 1, -1, 1, -1, hulk);

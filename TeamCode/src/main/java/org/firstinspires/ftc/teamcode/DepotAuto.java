@@ -35,6 +35,8 @@ public class DepotAuto extends LinearOpMode {
 
         waitForStart();
 
+        t.turn(550,'r',hulk);
+
         t.tfod.activate();
 
         if (t.tfod != null) {
@@ -98,46 +100,46 @@ public class DepotAuto extends LinearOpMode {
 
         // Thread.sleep(2000);     // FOR TESTING TENSORFLOW
         //t.moveBackward(500,.5, hulk);
-        t.turn(1340, 'r', hulk);
+        t.strafe(500,'l',hulk);
+        t.turn(90, 'r', hulk);
         if (p.equals("Center")) {
-            t.moveForward(3400,.25, hulk);
-            t.moveForward(700,-.25, hulk);
+            t.moveForward(1600,.25, hulk);
+            t.turn(180, 'r', hulk);
+            t.moveForward(350,.25, hulk);
          //   lowerMarker();
-            t.turn(680, 'r', hulk);
-            t.moveForward(600,.25, hulk);
-            t.turn(1660, 'r', hulk);
-            t.moveForward(4000,.25, hulk);
-            t.moveForward(500,.8,hulk);
+            t.turn(45, 'r', hulk);
+            t.moveForward(300,-.25, hulk);
+            t.turn(90, 'r', hulk);
+            t.moveForward(2000,.25, hulk);
+            t.moveForward(300,.8,hulk);
 
         }
         else if (p.equals("Right")) {
-            t.moveForward(700,.25,hulk);
-            t.turn(1400,'r', hulk);
-            t.moveForward(1500,.25,hulk);
-            t.turn(1800,'l', hulk);
-            t.moveForward(3000,.25,hulk);
-            t.moveForward(700,-.25, hulk);
+            t.strafe(500,'r',hulk);
+            t.turn(15,'l',hulk);
+            t.moveForward(1600,.25,hulk);
+            t.turn(180,'r', hulk);
+            t.moveForward(350,.25, hulk);
         //    lowerMarker();
-            t.turn(1120, 'r', hulk);
-            t.moveForward(1450,.25, hulk);
-            t.turn(1700, 'r', hulk);
-            t.moveForward(4000,.25, hulk);
-            t.moveForward(600,.8,hulk);
+            t.turn(60, 'r', hulk);
+            t.moveForward(725,.25, hulk);
+            t.turn(90, 'r', hulk);
+            t.moveForward(2000,.25, hulk);
+            t.moveForward(300,.8,hulk);
 
         }
         else { // "Left"
-            t.moveForward(700,.25,hulk);
-            t.turn(1400,'l', hulk);
-            t.moveForward(1500,.25,hulk);
-            t.turn(1800,'r', hulk);
-            t.moveForward(3000,.25,hulk);
-            t.moveForward(700,-.25, hulk);
+            t.strafe(500, 'l', hulk);
+            t.turn(15,'r', hulk);
+            t.moveForward(1600,.25,hulk);
+            t.turn(180,'r', hulk);
+            t.moveForward(350,.25, hulk);
           //  lowerMarker();
-            t.turn(500, 'r', hulk);
-            t.moveForward(1450,.25, hulk);
-            t.turn(1700, 'r', hulk);
-            t.moveForward(4000,.25, hulk);
-            t.moveForward(600,.8, hulk);
+            t.turn(30, 'r', hulk);
+            t.moveForward(725,.25, hulk);
+            t.turn(900, 'r', hulk);
+            t.moveForward(2000,.25, hulk);
+            t.moveForward(300,.8, hulk);
         }
     }
 }
