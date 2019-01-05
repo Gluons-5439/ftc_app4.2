@@ -95,6 +95,16 @@ public class AutonomousTools {
         hulk.hangLift.setPower(0);
     }
 
+    public void lowerMarker(Hardware hulk) throws InterruptedException {
+        moveForward(250,-0.25,hulk);
+        turn(180,'l',hulk);
+        // hulk.markerDrop.setPower(1);
+        Thread.sleep(1000);
+        // hulk.markerDrop.setPower(-1);
+        Thread.sleep(1000);
+        // hulk.markerDrop.setPower(0);
+    }
+
     public void initVuforia() {
 
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
