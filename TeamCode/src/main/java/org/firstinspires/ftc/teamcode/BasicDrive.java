@@ -57,7 +57,7 @@ public class BasicDrive extends LinearOpMode {
 
             // MOVEMENT TESTS FOR AUTONOMOUS
             if (gamepad1.x)
-                t.moveForward(1000,0.7,hulk);
+                t.moveForward(1000,0.5,hulk);
             if (gamepad1.a)
                 t.turn(1000,'l',hulk);
             if (gamepad1.b)

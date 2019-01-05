@@ -53,19 +53,28 @@ public class AutonomousTools {
     }
 
     public void moveForward(int moveTime, double speed, Hardware hulk) throws InterruptedException {
+        /*
+        HOW TO USE:
+        MAXSPEED   67.5 in/sec
+        DISTANCE TRAVELED = MAXSPEED * (moveTime / 1000) * speed
+         */
         setMotorPower(speed, 1, 1, 1, 1, hulk);
         Thread.sleep(moveTime);
         setMotorPower(hulk);
     }
 
-    public void turn(int time, char dir, Hardware hulk) throws InterruptedException {
+    public void turn(int degree, char dir, Hardware hulk) throws InterruptedException {
+        /*
+        HOW TO USE:
+        Enter degree
+         */
         if (dir == 'r') {
             setMotorPower(0.7, 1, -1, 1, -1, hulk);
         }
         else if (dir == 'l') {
             setMotorPower(0.7, -1, 1, -1, 1, hulk);
         }
-        Thread.sleep(time);
+        Thread.sleep((int)(550 * degree / 90));
         setMotorPower(hulk);
     }
 
