@@ -70,8 +70,7 @@ public class CraterAuto extends LinearOpMode {
                         // is not visible, and must be on the right
 
                         if (goldMineralY == -1 && silverMineral1Y != -1 && silverMineral2Y != -1) {
-                            telemetry.addData("Gold Mineral Position", "Left");
-                            p = "Left";
+                            p = "Right";
                         }
 
                         // If you can see one gold and one silver ...
@@ -79,23 +78,23 @@ public class CraterAuto extends LinearOpMode {
                         else if (goldMineralY != -1 && silverMineral1Y != -1) {
                             // ... if the gold is to the right of the silver, the gold is in the center ...
                             if (goldMineralY > silverMineral1Y) {
-                                telemetry.addData("Gold Mineral Position", "Center");
                                 p = "Center";
                             }
 
                             // ... otherwise it is on the left
 
                             else {
-                                telemetry.addData("Gold Mineral Position", "Right");
-                                p = "Right";
+
+                                p = "Left";
                             }
                         }
                     }
-                    telemetry.update();
+
                 }
             }
         }
-
+        telemetry.addData("Gold Mineral Position: ", p);
+        telemetry.update();
         t.strafe(670, 'l', hulk);
         if(p.equals("Center"))
         {

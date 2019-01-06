@@ -31,11 +31,9 @@ public class Hardware {
 
     private BNO055IMU imu;
 
-    // DcMotor rollerLift;         //Hub 2 Motor 0
     DcMotor hangLift;           //Hub 2 Motor 1 (top) AND GoBilda 5202 Series Yellow
-    // CRServo markerDrop;
+    CRServo markerDrop;         // Hub 3 Servo 0
 
-    //DcMotor spin;
 
     HardwareMap hwMap;
     private ElapsedTime period = new ElapsedTime();
@@ -71,8 +69,7 @@ public class Hardware {
             backRight = hwMap.dcMotor.get("backRight");
 
             hangLift = hwMap.dcMotor.get("hangLift");
-            // rollerLift = hwMap.dcMotor.get("rollerLift");
-            // markerDrop = hwMap.crservo.get("markerDrop");
+            markerDrop = hwMap.crservo.get("markerDrop");
 
         }
 
@@ -82,9 +79,7 @@ public class Hardware {
             backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
-            // hangLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            // rollerLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            hangLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             frontRight.setDirection(DcMotor.Direction.FORWARD);
             frontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -92,8 +87,8 @@ public class Hardware {
             backLeft.setDirection(DcMotor.Direction.REVERSE);
 
             hangLift.setDirection(DcMotor.Direction.FORWARD);
-            // rollerLift.setDirection(DcMotor.Direction.FORWARD);
-            // markerDrop.setDirection(CRServo.Direction.FORWARD);
+
+            markerDrop.setDirection(CRServo.Direction.FORWARD);
 
 
         }
@@ -103,9 +98,10 @@ public class Hardware {
             frontRight.setPower(0);
             backRight.setPower(0);
             backLeft.setPower(0);
+
             hangLift.setPower(0);
-            // rollerLift.setPower(0);
-            // markerDrop.setPower(0);
+
+            markerDrop.setPower(0);
         }
 
         public void waitForTick (long periodMs) throws InterruptedException {

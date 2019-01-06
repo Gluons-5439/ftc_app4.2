@@ -56,12 +56,8 @@ public class BasicDrive extends LinearOpMode {
             hulk.backRight.setPower(Range.clip(br,-1,1));
 
             // MOVEMENT TESTS FOR AUTONOMOUS
-            if (gamepad1.x)
-                t.moveForward(1000,0.5,hulk);
             if (gamepad1.a)
-                t.turn(1000,'l',hulk);
-            if (gamepad1.b)
-                t.strafe(1000,'l',hulk);
+                t.lowerMarker(hulk);
 
             // TELEMETRY
 
@@ -86,6 +82,7 @@ public class BasicDrive extends LinearOpMode {
             telemetry.addData("Right bumper", gamepad1.right_bumper);
             telemetry.addData("Left bumper", gamepad1.left_bumper);
             telemetry.addData("Right stick power: ", gamepad1.right_stick_x);
+            telemetry.addData("Marker Drop Servo Power: ", hulk.markerDrop.getPower());
 
             telemetry.update();
             // Adds everything to telemetry

@@ -65,49 +65,35 @@ public class DepotAuto extends LinearOpMode {
                         }
 
                         // If there is no gold (-1) and there two silvers (not -1) the gold
-                        // is not visible, and must be on the left
-
+                        // is not visible, and must be on the right
                         if (goldMineralY == -1 && silverMineral1Y != -1 && silverMineral2Y != -1) {
-                            telemetry.addData("Gold Mineral Position", "Right");
                             p = "Right";
                         }
-
-                        // If you can see one gold and one silver ...
-
-                        else if (goldMineralY != -1 && silverMineral1Y != -1) {
+                        else if (goldMineralY != -1 && silverMineral1Y != -1) {   // If you can see one gold and one silver ...
                             // ... if the gold is to the right of the silver, the gold is in the center ...
                             if (goldMineralY > silverMineral1Y) {
-                                telemetry.addData("Gold Mineral Position", "Center");
                                 p = "Center";
-                            }   // ... otherwise it is on the right
+                            }   // ... otherwise it is on the left
                             else {
-                                telemetry.addData("Gold Mineral Position", "Left");
                                 p = "Left";
                             }
                         }
-                        telemetry.addData("Silver pos 1: ", silverMineral1Y);
-                        telemetry.addData("Silver pos 2: ", silverMineral2Y);
-                        telemetry.addData("Gold pos: ", goldMineralY);
                     }
-                    telemetry.update();
+
                 }
             }
         }
+        telemetry.addData("Gold Mineral Position: ", p);
+        telemetry.update();
 
         // t.land(hulk);
 
-        // Thread.sleep(2000);     // FOR TESTING TENSORFLOW
-        //t.moveBackward(500,.5, hulk);
         t.strafe(500,'r',hulk);
         t.turn(90, 'r', hulk);
         if (p.equals("Center")) {
-            t.moveForward(3200,-.25, hulk);
-            t.turn(180, 'r', hulk);
-            t.moveForward(350,-.25, hulk);
-         //   lowerMarker();
-            t.turn(45, 'r', hulk);
-            t.moveForward(300,.25, hulk);
-            t.turn(90, 'r', hulk);
+            t.moveForward(2200,-.25, hulk);
+            t.lowerMarker(hulk);
+            t.turn(50, 'r', hulk);
             t.moveForward(2000,-.25, hulk);
             t.moveForward(300,-.8,hulk);
 
@@ -118,7 +104,7 @@ public class DepotAuto extends LinearOpMode {
             t.moveForward(1600,.25,hulk);
             t.turn(180,'r', hulk);
             t.moveForward(350,.25, hulk);
-        //    lowerMarker();
+            t.lowerMarker(hulk);
             t.turn(60, 'r', hulk);
             t.moveForward(725,.25, hulk);
             t.turn(90, 'r', hulk);
@@ -132,7 +118,7 @@ public class DepotAuto extends LinearOpMode {
             t.moveForward(1600,.25,hulk);
             t.turn(180,'r', hulk);
             t.moveForward(350,.25, hulk);
-          //  lowerMarker();
+            t.lowerMarker(hulk);
             t.turn(30, 'r', hulk);
             t.moveForward(725,.25, hulk);
             t.turn(900, 'r', hulk);

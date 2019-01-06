@@ -33,11 +33,6 @@ public class AutonomousTools {
 
     }
 
-    //public static void main(String ars[])
-
-
-    public int faceDegree = 0;          // Degree relative to direction it faces when landing ON DEPOT SIDE (crater side is -90) left - , right +
-
     private void setMotorPower(double speed, int fl, int fr, int bl, int br, Hardware hulk) {
         hulk.frontLeft.setPower(speed * fl);
         hulk.frontRight.setPower(speed * fr);
@@ -98,11 +93,11 @@ public class AutonomousTools {
     public void lowerMarker(Hardware hulk) throws InterruptedException {
         moveForward(250,-0.25,hulk);
         turn(180,'l',hulk);
-        // hulk.markerDrop.setPower(1);
-        Thread.sleep(1000);
-        // hulk.markerDrop.setPower(-1);
-        Thread.sleep(1000);
-        // hulk.markerDrop.setPower(0);
+        hulk.markerDrop.setPower(-1);
+        Thread.sleep(750);
+        hulk.markerDrop.setPower(1);
+        Thread.sleep(750);
+        hulk.markerDrop.setPower(0);
     }
 
     public void initVuforia() {
@@ -115,7 +110,7 @@ public class AutonomousTools {
         //  Instantiate the Vuforia engine
         this.vuforia = ClassFactory.getInstance().createVuforia(parameters);
 
-        // Loading trackables is not necessary for the Tensor Flow Object Detection engine.
+        // Loading trackables is not necessary for the Tensor Flow
     }
 
     public void initTfod(HardwareMap hardwareMap) {
@@ -125,12 +120,6 @@ public class AutonomousTools {
         this.tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_GOLD_MINERAL, LABEL_SILVER_MINERAL);
         tfodParameters.minimumConfidence = 0.6;
     }
-
-
-
-
-
-
 
 
    /* public void changeRollerLift(boolean up) throws InterruptedException { //if up is true, it is up, so the lift needs to go down, else, it goes up
