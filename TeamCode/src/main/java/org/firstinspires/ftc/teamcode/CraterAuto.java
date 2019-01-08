@@ -35,16 +35,9 @@ public class CraterAuto extends LinearOpMode {
         if (t.tfod != null) {
             boolean foundMinerals = false;
 
-
             while (!foundMinerals) {
                 List<Recognition> updatedRecognitions = t.tfod.getUpdatedRecognitions();
                 if (updatedRecognitions != null) {
-                    /*
-                    if (updatedRecognitions.size() == 2)
-                        t.setMotorPower(0);
-                    else t.setMotorPower(-0.05);
-                    */
-
                     telemetry.addData("# Objects Detected", updatedRecognitions.size());
                     if (updatedRecognitions.size() == 2) {
                         foundMinerals = true;
@@ -68,23 +61,15 @@ public class CraterAuto extends LinearOpMode {
 
                         // If there is no gold (-1) and there two silvers (not -1) the gold
                         // is not visible, and must be on the right
-
                         if (goldMineralY == -1 && silverMineral1Y != -1 && silverMineral2Y != -1) {
                             p = "Right";
                         }
-
-                        // If you can see one gold and one silver ...
-
-                        else if (goldMineralY != -1 && silverMineral1Y != -1) {
+                        else if (goldMineralY != -1 && silverMineral1Y != -1) {   // If you can see one gold and one silver ...
                             // ... if the gold is to the right of the silver, the gold is in the center ...
                             if (goldMineralY > silverMineral1Y) {
                                 p = "Center";
-                            }
-
-                            // ... otherwise it is on the left
-
+                            }   // ... otherwise it is on the left
                             else {
-
                                 p = "Left";
                             }
                         }
@@ -95,24 +80,23 @@ public class CraterAuto extends LinearOpMode {
         }
         telemetry.addData("Gold Mineral Position: ", p);
         telemetry.update();
-        t.strafe(670, 'l', hulk);
+        t.strafe(500,'r',hulk);
+        t.turn(80, 'r', hulk);
         if(p.equals("Center"))
         {
-            t.moveForward(3000,.8, hulk);
+            t.moveForward(1000,-.25, hulk);
         }
         else if(p.equals("Right"))
         {
-            t.turn(400,'r',hulk);
-            t.moveForward(2000,.25, hulk);
-            t.turn(800,'l',hulk);
-            t.moveForward(2000,.8, hulk);
+            t.strafe(1000,'l',hulk);
+            t.turn(20,'r',hulk);
+            t.moveForward(1000,-.25,hulk);
         }
         else
         {
-            t.turn(400,'l',hulk);
-            t.moveForward(2000,.25, hulk);
-            t.turn(800,'r',hulk);
-            t.moveForward(2000,.8, hulk);
+            t.strafe(1000, 'r', hulk);
+            t.turn(20,'l', hulk);
+            t.moveForward(1000,-.25,hulk);
         }
     }
 }

@@ -70,7 +70,7 @@ public class DepotAuto extends LinearOpMode {
                             p = "Right";
                         }
                         else if (goldMineralY != -1 && silverMineral1Y != -1) {   // If you can see one gold and one silver ...
-                            // ... if the gold is to the right of the silver, the gold is in the center ...
+                            // ... if the gold is to the left of the silver, the gold is in the center ...
                             if (goldMineralY > silverMineral1Y) {
                                 p = "Center";
                             }   // ... otherwise it is on the left
@@ -88,41 +88,40 @@ public class DepotAuto extends LinearOpMode {
 
         // t.land(hulk);
 
-        t.strafe(500,'r',hulk);
-        t.turn(90, 'r', hulk);
+        t.strafe(750,'r',hulk);
+        t.turn(80, 'r', hulk);
         if (p.equals("Center")) {
-            t.moveForward(2200,-.25, hulk);
+            t.strafe(300,'l',hulk);
+            t.moveForward(2500,-.25, hulk);
             t.lowerMarker(hulk);
-            t.turn(50, 'r', hulk);
-            t.moveForward(2000,-.25, hulk);
+            t.turn(65, 'r', hulk);
+            t.moveForward(3000,-.15, hulk);
+            t.turn(30,'l',hulk);
+            t.moveForward(3600,-.25, hulk);
             t.moveForward(300,-.8,hulk);
 
         }
         else if (p.equals("Right")) {
-            t.strafe(500,'r',hulk);
-            t.turn(15,'l',hulk);
-            t.moveForward(1600,.25,hulk);
-            t.turn(180,'r', hulk);
-            t.moveForward(350,.25, hulk);
+            t.strafe(1200,'l',hulk);
+            t.turn(35,'r',hulk);
+            t.moveForward(2000,-.25,hulk);
             t.lowerMarker(hulk);
-            t.turn(60, 'r', hulk);
-            t.moveForward(725,.25, hulk);
-            t.turn(90, 'r', hulk);
-            t.moveForward(2000,.25, hulk);
+            t.turn(55, 'l', hulk);
+            t.moveForward(725,.15, hulk);
+            t.turn(90, 'l', hulk);
+            t.moveForward(3600,.25, hulk);
             t.moveForward(300,.8,hulk);
 
         }
         else { // "Left"
-            t.strafe(500, 'l', hulk);
-            t.turn(15,'r', hulk);
-            t.moveForward(1600,.25,hulk);
-            t.turn(180,'r', hulk);
-            t.moveForward(350,.25, hulk);
+            t.strafe(1000, 'r', hulk);
+            t.turn(40,'l', hulk);
+            t.moveForward(2500,-.25,hulk);
             t.lowerMarker(hulk);
-            t.turn(30, 'r', hulk);
-            t.moveForward(725,.25, hulk);
-            t.turn(900, 'r', hulk);
-            t.moveForward(2000,.25, hulk);
+            t.turn(40, 'r', hulk);
+            t.moveForward(725,.15, hulk);
+            t.turn(85, 'r', hulk);
+            t.moveForward(3600,.25, hulk);
             t.moveForward(300,.8, hulk);
         }
     }

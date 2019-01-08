@@ -91,13 +91,20 @@ public class AutonomousTools {
     }
 
     public void lowerMarker(Hardware hulk) throws InterruptedException {
-        moveForward(250,-0.25,hulk);
+        moveForward(200,0.25,hulk);
         turn(180,'l',hulk);
         hulk.markerDrop.setPower(-1);
         Thread.sleep(750);
         hulk.markerDrop.setPower(1);
         Thread.sleep(750);
         hulk.markerDrop.setPower(0);
+    }
+
+    public void moveLatch(boolean latchPos, Hardware hulk)
+    {
+        //(latchPos ? hulk.latch.setPosition(0) : hulk.latch.setPosition(0.2));
+
+        latchPos = !latchPos;
     }
 
     public void initVuforia() {
