@@ -13,6 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.Came
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Basic Drive", group = "TeleOp")
 public class BasicDrive extends LinearOpMode {
     final double pow = 1;
+    boolean latch = false;
     Hardware hulk = new Hardware();
     //Creates hulk object
     static final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -25,14 +26,14 @@ public class BasicDrive extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-
+            //DRIVE
 
             double forward = Math.abs(gamepad1.left_stick_y) > 0.1 ? gamepad1.left_stick_y * pow : 0;
             double clockwise = Math.abs(gamepad1.left_stick_x) > 0.1 ? -gamepad1.left_stick_x * pow : 0;
             double right = Math.abs(gamepad1.right_stick_x) > 0.1 ? gamepad1.right_stick_x : 0;
             //Math for drive relative to theta
             clockwise *= -0.5;
-            //Sets speed when rotating, still needs work
+
             double fr = forward + clockwise + right;
             double br = forward + clockwise - right;
             double fl = forward - clockwise - right;
@@ -55,11 +56,34 @@ public class BasicDrive extends LinearOpMode {
             hulk.frontRight.setPower(Range.clip(fr,-1,1));
             hulk.backRight.setPower(Range.clip(br,-1,1));
 
-            // MOVEMENT TESTS FOR AUTONOMOUS
+            // BUTTONS
             if (gamepad1.a)
                 t.lowerMarker(hulk);
+            if(gamepad1.x)
+                t.moveLatch(latch,hulk); //latch is a boolean which true = is latched, false = isn't latched.
 
-            // TELEMETRY
+            if(gamepad1.right_trigger > 0.1)
+            {
+                hulk.hangLift.setPower(-0.75);
+            }
+            else if(gamepad1.left_trigger > 0.1)
+            {
+                hulk.hangLift.setPower(0.75);
+            }
+            else
+                hulk.hangLift.setPower(0);
+
+            if(gamepad1.right_bumper)
+            {
+                hulk.latch.setPosition(hulk.latch.getPosition() + 0.01);
+            }
+            else if(gamepad1.left_bumper)
+            {
+                hulk.latch.setPosition(hulk.latch.getPosition() - 0.01);
+            }
+
+
+            // TELEMETRY STATEMENTS
 
             telemetry.addLine("SERVOS");
             telemetry.addLine();
@@ -83,7 +107,7 @@ public class BasicDrive extends LinearOpMode {
             telemetry.addData("Left bumper", gamepad1.left_bumper);
             telemetry.addData("Right stick power: ", gamepad1.right_stick_x);
             telemetry.addData("Marker Drop Servo Power: ", hulk.markerDrop.getPower());
-
+            telemetry.addData("Latch Servo Position: ", hulk.latch.getPosition());
 
             telemetry.update();
             // Adds everything to telemetry

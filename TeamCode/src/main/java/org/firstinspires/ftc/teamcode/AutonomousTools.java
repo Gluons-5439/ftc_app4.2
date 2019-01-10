@@ -85,14 +85,16 @@ public class AutonomousTools {
     }
 
     public void land(Hardware hulk) throws InterruptedException {
+
         hulk.hangLift.setPower(-1);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         hulk.hangLift.setPower(0);
+        hulk.latch.setPosition(0.48);
     }
 
     public void lowerMarker(Hardware hulk) throws InterruptedException {
         moveForward(200,0.25,hulk);
-        turn(180,'l',hulk);
+        turn(190,'l',hulk);
         hulk.markerDrop.setPower(-1);
         Thread.sleep(750);
         hulk.markerDrop.setPower(1);
@@ -102,9 +104,14 @@ public class AutonomousTools {
 
     public void moveLatch(boolean latchPos, Hardware hulk)
     {
-        //(latchPos ? hulk.latch.setPosition(0) : hulk.latch.setPosition(0.2));
+        if(latchPos) {
+            hulk.latch.setPosition(0.3);
+        }
+        else
+            hulk.latch.setPosition(0.48);
 
         latchPos = !latchPos;
+
     }
 
     public void initVuforia() {
@@ -113,11 +120,8 @@ public class AutonomousTools {
 
         parameters.vuforiaLicenseKey = "AfmBbcz/////AAAAGbLGg++zzk4MiOrcPTc3t9xQj3QHfISJprebOgt5JJ4+83xtFO+ApGlI3GVY/aMgCpoGEIzaJse9sXiYDiLYpJQlGDX765tWJUrqM+pzqLxVXjWA1J6c968/YqYq74Vq5emNxGHj5SF3HP3m43Iq/YYgkSdMv4BR+RThPPnIIzrbAjEAHHtMgH7vVh036+bcw9UqBfSdD/IBqrKpJLERn5+Qi/4Q4EoReCC0CTDfZ+LcY0rUur0QZRkMpxx/9s4eCgIU+qfOcSlBvjoX7QAQ2MImUME1y5yJiyaWueamnhRBOwERGBuDKyGp4eBWp4i3esJcplrWYovjzPg9fL7Thy8v9KnrHy22PUFAYY+1vjKp";
         parameters.cameraDirection = CameraDirection.BACK;
-
-        //  Instantiate the Vuforia engine
         this.vuforia = ClassFactory.getInstance().createVuforia(parameters);
 
-        // Loading trackables is not necessary for the Tensor Flow
     }
 
     public void initTfod(HardwareMap hardwareMap) {
@@ -128,7 +132,7 @@ public class AutonomousTools {
         tfodParameters.minimumConfidence = 0.6;
     }
 
-
+ // Commented out due to not using foam roller idea for qualifier
    /* public void changeRollerLift(boolean up) throws InterruptedException { //if up is true, it is up, so the lift needs to go down, else, it goes up
         if (!up) {
             hulk.rollerLift.setPower(-0.25); //not too fast

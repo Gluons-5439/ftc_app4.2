@@ -16,12 +16,9 @@ import java.util.List;
 
 public class CraterAuto extends LinearOpMode {
     Hardware hulk = new Hardware();
-    // VuforiaLocalizer vuforia;
-    // TFObjectDetector tfod;
     AutonomousTools t = new AutonomousTools();
 
     final double MAX_WHEEL_VELOCITY = 0.77203;
-    int faceDegree = -135;
 
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
@@ -29,7 +26,8 @@ public class CraterAuto extends LinearOpMode {
         t.initTfod(hardwareMap);
 
         String p = "";
-
+        waitForStart();
+        t.land(hulk);
         t.tfod.activate();
 
         if (t.tfod != null) {
@@ -85,18 +83,48 @@ public class CraterAuto extends LinearOpMode {
         if(p.equals("Center"))
         {
             t.moveForward(1000,-.25, hulk);
+            t.moveForward(500,.25, hulk);
+            t.strafe(2000,'l',hulk);
+            t.turn(135,'l',hulk);
+            Thread.sleep(5000); //Waits for Depot robot to finish using the depot area
+            t.strafe(1200,'r',hulk);
+            t.moveForward(2000,-.25,hulk);
+            t.lowerMarker(hulk);
+            t.moveForward(3000,-.25,hulk);
+            t.moveForward(800,-.8,hulk); //extra push to get slightly over the crater
+
         }
         else if(p.equals("Right"))
         {
             t.strafe(1000,'l',hulk);
             t.turn(20,'r',hulk);
-            t.moveForward(1000,-.25,hulk);
+            t.moveForward(1500,-.25,hulk);
+            t.moveForward(500,.25,hulk);
+            t.turn(20,'l',hulk);
+            t.strafe(2500,'l',hulk);
+            t.turn(135,'l',hulk);
+            Thread.sleep(5000);
+            t.strafe(1200,'r',hulk);
+            t.moveForward(2000,-.25,hulk);
+            t.lowerMarker(hulk);
+            t.moveForward(3000,-.25,hulk);
+            t.moveForward(800,-.8,hulk);
         }
         else
-        {
+        { // "Left"
             t.strafe(1000, 'r', hulk);
             t.turn(20,'l', hulk);
             t.moveForward(1000,-.25,hulk);
+            t.moveForward(500,.25,hulk);
+            t.turn(20,'r',hulk);
+            t.strafe(1500,'l',hulk);
+            t.turn(135,'l',hulk);
+            Thread.sleep(5000);
+            t.strafe(1200,'r',hulk);
+            t.moveForward(2000,-.25,hulk);
+            t.lowerMarker(hulk);
+            t.moveForward(3000,-.25,hulk);
+            t.moveForward(800,-.8,hulk);
         }
     }
 }

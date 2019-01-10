@@ -21,20 +21,17 @@ public class DepotAuto extends LinearOpMode {
     Hardware hulk = new Hardware();
     AutonomousTools t = new AutonomousTools();
 
-    final double MAX_WHEEL_VELOCITY = 0.77203;
-    int faceDegree = -135;
+    final double MAX_WHEEL_VELOCITY = 0.77203; // Good to keep track of
 
     public void runOpMode() throws InterruptedException {
         hulk.init(hardwareMap);
         t.initVuforia();
         t.initTfod(hardwareMap);
 
-
-        final double POW = 0.5;
         String p = "";
 
         waitForStart();
-
+        t.land(hulk);
         t.tfod.activate();
 
         if (t.tfod != null) {
@@ -86,13 +83,13 @@ public class DepotAuto extends LinearOpMode {
         telemetry.addData("Gold Mineral Position: ", p);
         telemetry.update();
 
-        // t.land(hulk);
+
 
         t.strafe(750,'r',hulk);
         t.turn(80, 'r', hulk);
         if (p.equals("Center")) {
             t.strafe(300,'l',hulk);
-            t.moveForward(2500,-.25, hulk);
+            t.moveForward(3000,-.25, hulk);
             t.lowerMarker(hulk);
             t.turn(65, 'r', hulk);
             t.moveForward(3000,-.15, hulk);

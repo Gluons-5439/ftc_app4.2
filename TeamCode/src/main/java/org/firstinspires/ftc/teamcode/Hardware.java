@@ -33,13 +33,11 @@ public class Hardware {
 
     DcMotor hangLift;           //Hub 2 Motor 1 (top) AND GoBilda 5202 Series Yellow
     CRServo markerDrop;         // Hub 3 Servo 0
-    //Servo latch;               //Hub 3 Servo 1
+    Servo latch;               //Hub 3 Servo 1
 
 
     HardwareMap hwMap;
     private ElapsedTime period = new ElapsedTime();
-    // static final int tickSpeed = 1120, distanceFromCentermm = 203;
-    // static final double wheelCircumferencemm = 159.5929;
 
 
         public Hardware(){
@@ -71,7 +69,7 @@ public class Hardware {
 
             hangLift = hwMap.dcMotor.get("hangLift");
             markerDrop = hwMap.crservo.get("markerDrop");
-            //latch = hwMap.servo.get("latch");
+            latch = hwMap.servo.get("latch");
         }
 
         private void initMotorSettings () {
@@ -103,7 +101,7 @@ public class Hardware {
             hangLift.setPower(0);
 
             markerDrop.setPower(0);
-            //latch.setPosition(0); //still have to see what 0 is in setPosition
+            latch.setPosition(0.5);
         }
 
         public void waitForTick (long periodMs) throws InterruptedException {
